@@ -1,6 +1,7 @@
 package com.cinema.app.bean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserAccount {
@@ -18,11 +19,9 @@ public class UserAccount {
         this.userName = userName;
         this.password = password;
 
-        this.roles = new ArrayList<String>();
+        this.roles = new ArrayList<>();
         if (roles != null) {
-            for (String r : roles) {
-                this.roles.add(r);
-            }
+            Collections.addAll(this.roles, roles);
         }
     }
 

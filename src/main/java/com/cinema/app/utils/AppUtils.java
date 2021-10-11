@@ -11,19 +11,18 @@ public class AppUtils {
 
     private static int REDIRECT_ID = 0;
 
-    private static final Map<Integer, String> id_uri_map = new HashMap<Integer, String>();
-    private static final Map<String, Integer> uri_id_map = new HashMap<String, Integer>();
+    private static final Map<Integer, String> id_uri_map = new HashMap<>();
+    private static final Map<String, Integer> uri_id_map = new HashMap<>();
 
-    // Сохранить информацию пользователя в Session.
-    public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
-        // На JSP можно получить доступ через ${loginedUser}
-        session.setAttribute("loginedUser", loginedUser);
+//     Store user information in Session
+    public static void storeLoginUser(HttpSession session, UserAccount loginUser) {
+//         The JSP can be accessed via $ {loginUser}
+        session.setAttribute("loginUser", loginUser);
     }
 
-    // Получить информацию пользователя, сохраненную в Session.
-    public static UserAccount getLoginedUser(HttpSession session) {
-        UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
-        return loginedUser;
+//    Retrieve the user's information stored in the Session
+    public static UserAccount getLoginUser(HttpSession session) {
+        return (UserAccount) session.getAttribute("loginUser");
     }
 
     public static int storeRedirectAfterLoginUrl(HttpSession session, String requestUri) {
@@ -41,11 +40,7 @@ public class AppUtils {
     }
 
     public static String getRedirectAfterLoginUrl(HttpSession session, int redirectId) {
-        String url = id_uri_map.get(redirectId);
-        if (url != null) {
-            return url;
-        }
-        return null;
+        return id_uri_map.get(redirectId);
     }
 
 }

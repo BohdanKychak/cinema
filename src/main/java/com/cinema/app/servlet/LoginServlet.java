@@ -1,6 +1,7 @@
 package com.cinema.app.servlet;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,8 @@ import com.cinema.app.dao.UserDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+
+    private static final Logger log = Logger.getLogger(LoginServlet.class.getName());
 
     public LoginServlet() {
         super();
@@ -51,13 +53,14 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        AppUtils.storeLoginedUser(request.getSession(), userAccount);
+        AppUtils.storeLoginUser(request.getSession(), userAccount);
 
         //
         int redirectId = -1;
         try {
             redirectId = Integer.parseInt(request.getParameter("redirectId"));
         } catch (Exception e) {
+            log.severe(e.getMessage());
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
         if (requestUri != null) {

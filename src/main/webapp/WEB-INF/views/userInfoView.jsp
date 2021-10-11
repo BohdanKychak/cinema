@@ -8,9 +8,9 @@
 
      <jsp:include page="menu2.jsp"></jsp:include>
 
-      <h3>Hello: ${loginedUser.userName}</h3>
+      <h3>Hello: ${loginUser.userName}</h3>
 
-      User Name: <b>${loginedUser.userName}</b>
+      User Name: <b>${loginUser.userName}</b>
       <br />
 
 

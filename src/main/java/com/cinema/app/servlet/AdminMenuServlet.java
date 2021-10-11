@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/adminMenu")
 public class AdminMenuServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
     public AdminMenuServlet() {
         super();

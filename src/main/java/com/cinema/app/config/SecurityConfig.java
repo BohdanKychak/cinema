@@ -11,7 +11,7 @@ public class SecurityConfig {
     public static final String ROLE_ADMIN = "ADMIN";
     public static final String ROLE_USER = "USER";
 
-    private static final Map<String, List<String>> mapConfig = new HashMap<String, List<String>>();
+    private static final Map<String, List<String>> mapConfig = new HashMap<>();
 
     static {
         init();
@@ -19,16 +19,16 @@ public class SecurityConfig {
 
     private static void init() {
 
-        // Конфигурация для роли "USER".
-        List<String> urlPatterns1 = new ArrayList<String>();
+        // Configuration for the role "USER".
+        List<String> urlPatterns1 = new ArrayList<>();
 
         urlPatterns1.add("/userInfo");
         urlPatterns1.add("/userMenu");
 
         mapConfig.put(ROLE_USER, urlPatterns1);
 
-        // Конфигурация для роли "ADMIN".
-        List<String> urlPatterns2 = new ArrayList<String>();
+        // Configuration for the role "ADMIN".
+        List<String> urlPatterns2 = new ArrayList<>();
 
         urlPatterns2.add("/userInfo");
         urlPatterns2.add("/adminMenu");

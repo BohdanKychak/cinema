@@ -37,9 +37,9 @@ public class SecurityFilter implements Filter {
 
         String servletPath = request.getServletPath();
 
-        // Информация пользователя сохранена в Session
-        // (После успешного входа в систему).
-        UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
+//      User information stored in Session
+//      (After successful login)
+        UserAccount loginUser = AppUtils.getLoginUser(request.getSession());
 
         if (servletPath.equals("/login")) {
             chain.doFilter(request, response);
@@ -47,34 +47,33 @@ public class SecurityFilter implements Filter {
         }
         HttpServletRequest wrapRequest = request;
 
-        if (loginedUser != null) {
-            // User Name
-            String userName = loginedUser.getUserName();
+        if (loginUser != null) {
+//            User Name
+            String userName = loginUser.getUserName();
 
-            // Роли (Role).
-            List<String> roles = loginedUser.getRoles();
+//            Roles
+            List<String> roles = loginUser.getRoles();
 
-            // Старый пакет request с помощью нового Request с информацией userName и Roles.
+//            Old request packet with new Request with userName and Roles information
             wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
         }
 
-        // Страницы требующие входа в систему.
+//         Pages requiring login
         if (SecurityUtils.isSecurityPage(request)) {
 
-            // Если пользователь еще не вошел в систему,
-            // Redirect (перенаправить) к странице логина.
-            if (loginedUser == null) {
+//             If the user is not logged in yet, redirect to login page.
+            if (loginUser == null) {
 
                 String requestUri = request.getRequestURI();
 
-                // Сохранить текущую страницу для перенаправления (redirect) после успешного входа в систему.
+//                 Save the current page for redirection after successful login
                 int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
 
                 response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
                 return;
             }
 
-            // Проверить пользователь имеет действительную роль или нет?
+//             Check the user has a valid role or not
             boolean hasPermission = SecurityUtils.hasPermission(wrapRequest);
             if (!hasPermission) {
 

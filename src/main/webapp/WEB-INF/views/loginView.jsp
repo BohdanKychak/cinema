@@ -35,8 +35,5 @@
 
       <p style="color:blue;">Login with:</p>
 
-      user/123 <br>
-      admin/789
-
    </body>
 </html>

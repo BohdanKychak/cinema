@@ -38,9 +38,8 @@ public class AccountDAO {
 
             list = new ArrayList<>();
             while (resultSet.next()) {
-                String a = resultSet.getString(info);
-                System.out.println(a);
-                list.add(a);
+                String data = resultSet.getString(info);
+                list.add(data);
             }
         } catch (SQLException e) {
             log.severe(e.getMessage());

@@ -19,4 +19,4 @@
 </a>
 
 &nbsp;
-<span style="color:green">[ ${loginedUser.userName} ]</span>
+<span style="color:green">[ ${loginUser.userName} ]</span>
