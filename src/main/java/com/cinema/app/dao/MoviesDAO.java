@@ -10,11 +10,7 @@ import java.util.logging.Logger;
 
 public class MoviesDAO {
     private static final Logger log = Logger.getLogger(MoviesDAO.class.getName());
-//    private final static String user = "postgres";
-//    private final static String password = "266";
-//    private final static String url = "jdbc:postgresql://localhost:5432/cinema";
     private final DBManager dbManager = DBManager.getInstance();
-
 
     public List<Movies> getMovies() {
 
@@ -40,7 +36,6 @@ public class MoviesDAO {
                         .withPrice(resultSet.getDouble("price"))
                         .withFreePlaces(resultSet.getInt("freePlaces"))
                         .withHallId(resultSet.getLong("hallId")).build();
-
                 list.add(movies);
             }
         } catch (SQLException e) {
