@@ -1,0 +1,16 @@
+# IntelliJ
+**/.idea/
+*.iml
+**/.iws
+*.ids
+
+# Java
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ucls
+
+# Maven
+target/
