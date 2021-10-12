@@ -8,7 +8,7 @@ public class DBManager {
     private final static String user = "postgres";
     private final static String password = "266";
     private final static String url = "jdbc:postgresql://localhost:5432/cinema";
-    private final static int connectionCount= 5;
+    private final static int connectionCount = 5;
 
     private static DBManager instance;
     private static ConnectionPool connectionPool;

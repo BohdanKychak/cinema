@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cinema.app.request.UserRoleRequestWrapper;
 import com.cinema.app.utils.AppUtils;
-import com.cinema.app.bean.UserAccount;
+import com.cinema.app.model.UserAccount;
 import com.cinema.app.utils.SecurityUtils;
 
 @WebFilter("/*")

@@ -22,7 +22,7 @@ public class AdminMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/adminMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/adminPageView.jsp");
 
         dispatcher.forward(request, response);
     }

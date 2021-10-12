@@ -1,4 +1,4 @@
-package com.cinema.app.bean;
+package com.cinema.app.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +8,7 @@ public class UserAccount {
 
     private String login;
     private String password;
+    private String role;
 
     private List<String> roles;
 
@@ -36,6 +37,14 @@ public class UserAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public List<String> getRoles() {

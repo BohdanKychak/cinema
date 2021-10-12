@@ -1,4 +1,6 @@
-package com.cinema.app.dao;
+package com.cinema.app.utils;
+
+import com.cinema.app.dao.DBManager;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,9 +11,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class AccountDAO {
-    private static final Logger log = Logger.getLogger(AccountDAO.class.getName());
+public class AccountUtils {
+    private static final Logger log = Logger.getLogger(AccountUtils.class.getName());
     private static final DBManager dbManager = DBManager.getInstance();
+
+    public static List<String> getAllLogin() {
+        List<String> allLogin = new ArrayList<>(getLogin("user"));
+        allLogin.addAll(getLogin("admin"));
+        return allLogin;
+    }
 
     public static List<String> getLogin(String role) {
         List<String> login = Collections.emptyList();

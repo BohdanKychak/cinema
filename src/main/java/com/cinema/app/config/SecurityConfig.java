@@ -32,6 +32,7 @@ public class SecurityConfig {
 
         urlPatterns2.add("/userInfo");
         urlPatterns2.add("/adminMenu");
+        urlPatterns2.add("/createNewAccount");
 
         mapConfig.put(ROLE_ADMIN, urlPatterns2);
     }

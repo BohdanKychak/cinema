@@ -2,13 +2,13 @@
 <html>
    <head>
       <meta charset="UTF-8">
-      <title>User Menu</title>
+      <title>User Page</title>
    </head>
    <body>
 
       <jsp:include page="menuUserView.jsp"></jsp:include>
 
-      <h3>User Menu</h3>
+      <h3>User Page</h3>
 
       Hello, user. You can find information about movies in our cinema in the "movies" tab!
 

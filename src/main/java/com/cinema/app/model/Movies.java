@@ -42,47 +42,54 @@ public class Movies {
         return hallId;
     }
 
-    public static class Builder{
+    public static class Builder {
         private final Movies newMovies;
 
         public Builder() {
             newMovies = new Movies();
         }
 
-        public Builder withId(long id){
+        public Builder withId(long id) {
             newMovies.id = id;
             return this;
         }
-        public Builder withMovieTitle(String movieTitle){
+
+        public Builder withMovieTitle(String movieTitle) {
             newMovies.movieTitle = movieTitle;
             return this;
         }
-        public Builder withAccess(String access){
+
+        public Builder withAccess(String access) {
             newMovies.access = access;
             return this;
         }
-        public Builder withMovieTime(String movieTime){
+
+        public Builder withMovieTime(String movieTime) {
             newMovies.movieTime = movieTime;
             return this;
         }
-        public Builder withMovieDate(String movieDate){
+
+        public Builder withMovieDate(String movieDate) {
             newMovies.movieDate = movieDate;
             return this;
         }
-        public Builder withPrice(double price){
+
+        public Builder withPrice(double price) {
             newMovies.price = price;
             return this;
         }
-        public Builder withFreePlaces(int freePlaces){
+
+        public Builder withFreePlaces(int freePlaces) {
             newMovies.freePlaces = freePlaces;
             return this;
         }
-        public Builder withHallId(long hallId){
+
+        public Builder withHallId(long hallId) {
             newMovies.hallId = hallId;
             return this;
         }
 
-        public Movies build(){
+        public Movies build() {
             return newMovies;
         }
 

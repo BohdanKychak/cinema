@@ -2,6 +2,7 @@ package com.cinema.app.servlet;
 
 import com.cinema.app.dao.MoviesDAO;
 import com.cinema.app.model.Movies;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,6 @@ import java.util.List;
 
 @WebServlet("/movies")
 public class MoviesServlet extends HttpServlet {
-
 
 
     @Override

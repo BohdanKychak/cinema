@@ -1,10 +1,13 @@
 package com.cinema.app.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.cinema.app.config.SecurityConfig;
-import com.cinema.app.bean.UserAccount;
+import com.cinema.app.model.UserAccount;
+import com.cinema.app.utils.AccountUtils;
 
 
 public class UserDAO {
@@ -18,8 +21,8 @@ public class UserDAO {
     private static void initUsers() {
 
         String role = "user";
-        List<String> userLogin = AccountDAO.getLogin(role);
-        List<String> userPassword = AccountDAO.getPassword(role);
+        List<String> userLogin = AccountUtils.getLogin(role);
+        List<String> userPassword = AccountUtils.getPassword(role);
 
         for (int i = 0; i < userLogin.size(); i++) {
             // This user has a role as USER.
@@ -29,8 +32,8 @@ public class UserDAO {
         }
 
         role = "admin";
-        List<String> adminLogin = AccountDAO.getLogin(role);
-        List<String> adminPassword = AccountDAO.getPassword(role);
+        List<String> adminLogin = AccountUtils.getLogin(role);
+        List<String> adminPassword = AccountUtils.getPassword(role);
         for (int i = 0; i < adminLogin.size(); i++) {
             // This user has 2 roles USER and ADMIN.
             UserAccount mng = new UserAccount(adminLogin.get(i), adminPassword.get(i), //

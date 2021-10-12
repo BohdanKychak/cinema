@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.cinema.app.bean.UserAccount;
+import com.cinema.app.model.UserAccount;
 
 public class AppUtils {
 
@@ -14,13 +14,13 @@ public class AppUtils {
     private static final Map<Integer, String> id_uri_map = new HashMap<>();
     private static final Map<String, Integer> uri_id_map = new HashMap<>();
 
-//     Store user information in Session
+    //     Store user information in Session
     public static void storeLoginUser(HttpSession session, UserAccount loginUser) {
 //         The JSP can be accessed via $ {loginUser}
         session.setAttribute("loginUser", loginUser);
     }
 
-//    Retrieve the user's information stored in the Session
+    //    Retrieve the user's information stored in the Session
     public static UserAccount getLoginUser(HttpSession session) {
         return (UserAccount) session.getAttribute("loginUser");
     }

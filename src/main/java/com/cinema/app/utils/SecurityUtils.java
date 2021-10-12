@@ -9,7 +9,7 @@ import com.cinema.app.config.SecurityConfig;
 
 public class SecurityUtils {
 
-//     Check if the given 'request' requires login or not
+    //     Check if the given 'request' requires login or not
     public static boolean isSecurityPage(HttpServletRequest request) {
         String urlPattern = UrlPatternUtils.getUrlPattern(request);
         Set<String> roles = SecurityConfig.getAllAppRoles();
@@ -23,7 +23,7 @@ public class SecurityUtils {
         return false;
     }
 
-//     Check if the given 'request' has a suitable role
+    //     Check if the given 'request' has a suitable role
     public static boolean hasPermission(HttpServletRequest request) {
         String urlPattern = UrlPatternUtils.getUrlPattern(request);
         Set<String> allRoles = SecurityConfig.getAllAppRoles();

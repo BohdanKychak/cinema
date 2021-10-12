@@ -22,7 +22,7 @@ public class UserMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/userMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/userPageView.jsp");
 
         dispatcher.forward(request, response);
     }

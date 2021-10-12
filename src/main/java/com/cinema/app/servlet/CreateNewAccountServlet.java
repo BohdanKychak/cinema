@@ -12,20 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.cinema.app.dao.RegistrationDAO;
 import com.cinema.app.utils.SearchForRegistrationErrorsUtils;
 
-@WebServlet("/registration")
-public class RegistrationServlet extends HttpServlet {
+@WebServlet("/createNewAccount")
+public class CreateNewAccountServlet extends HttpServlet {
 
-    public RegistrationServlet() {
+    public CreateNewAccountServlet() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/registrationView.jsp");
-
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/createNewAccountView.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -36,26 +34,30 @@ public class RegistrationServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String role = "user";
+        String role = request.getParameter("role");
+
 
         boolean correct = createNewUser(request, response, login, password, role);
 
         if (correct) {
-            response.sendRedirect("/cinema/successfulRegistration");
+            response.sendRedirect("/cinema/createNewAccount");
+
         }
+
     }
 
     public boolean createNewUser(HttpServletRequest request, HttpServletResponse response,
                                  String login, String password, String role)
             throws ServletException, IOException {
+
         String errorMessage = SearchForRegistrationErrorsUtils.message(login, password);
 
         if (errorMessage != null) {
 
-            RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/registrationView.jsp");
-
             request.setAttribute("errorMessage", errorMessage);
+
+            RequestDispatcher dispatcher
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/createNewAccountView.jsp");
 
             dispatcher.forward(request, response);
             return false;

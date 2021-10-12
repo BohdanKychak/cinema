@@ -2,14 +2,14 @@
 <html>
    <head>
       <meta charset="UTF-8">
-      <title>Admin Menu</title>
+      <title>Admin Page</title>
    </head>
 
    <body>
 
-      <jsp:include page="menuUserView.jsp"></jsp:include>
+      <jsp:include page="menuAdminView.jsp"></jsp:include>
 
-      <h3>Admin Menu</h3>
+      <h3>Admin Page</h3>
 
       Hello, This is a protected page!
 

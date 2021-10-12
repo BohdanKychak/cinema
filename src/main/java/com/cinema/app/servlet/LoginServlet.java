@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cinema.app.bean.UserAccount;
+import com.cinema.app.model.UserAccount;
 import com.cinema.app.utils.AppUtils;
 import com.cinema.app.dao.UserDAO;
 
