@@ -6,11 +6,11 @@
    </head>
    <body>
 
-     <jsp:include page="menu2.jsp"></jsp:include>
+     <jsp:include page="menuUserView.jsp"></jsp:include>
 
-      <h3>Hello: ${loginUser.userName}</h3>
+      <h3>Hello: ${loginUser.login}</h3>
 
-      User Name: <b>${loginUser.userName}</b>
+      User: <b>${loginUser.login}</b>
       <br />
 
 

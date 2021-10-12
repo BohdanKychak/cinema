@@ -1,6 +1,7 @@
 package com.cinema.app.servlet;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -37,12 +38,12 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String userName = request.getParameter("userName");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
-        UserAccount userAccount = UserDAO.findUser(userName, password);
+        UserAccount userAccount = UserDAO.findUser(login, password);
 
         if (userAccount == null) {
-            String errorMessage = "Invalid userName or Password";
+            String errorMessage = "Invalid login or Password";
 
             request.setAttribute("errorMessage", errorMessage);
 
@@ -55,7 +56,6 @@ public class LoginServlet extends HttpServlet {
 
         AppUtils.storeLoginUser(request.getSession(), userAccount);
 
-        //
         int redirectId = -1;
         try {
             redirectId = Integer.parseInt(request.getParameter("redirectId"));
@@ -63,11 +63,7 @@ public class LoginServlet extends HttpServlet {
             log.severe(e.getMessage());
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
-        if (requestUri != null) {
-            response.sendRedirect(requestUri);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/userInfo");
-        }
+        response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + "/userInfo"));
 
     }
 

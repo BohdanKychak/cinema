@@ -1,3 +1,7 @@
+<style>
+    <%@include file="css/menuStyle.css" %>
+</style>
+
 <a href="${pageContext.request.contextPath}/userMenu">
     User Menu
 </a>
@@ -10,6 +14,7 @@
     Movies
 </a>
 ||
-<a href="${pageContext.request.contextPath}/login">
-    Login
+<a href = "javascript:history.back()">
+    Back
 </a>
+

@@ -7,7 +7,7 @@
 
    <body>
 
-      <jsp:include page="menu2.jsp"></jsp:include>
+      <jsp:include page="menuUserView.jsp"></jsp:include>
 
       <h3>Admin Menu</h3>
 

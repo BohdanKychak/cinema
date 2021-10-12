@@ -1,3 +1,7 @@
+<style>
+  <%@include file="css/menuStyle.css" %>
+</style>
+
 <a href="${pageContext.request.contextPath}/userMenu">
   User Menu
 </a>
@@ -19,4 +23,4 @@
 </a>
 
 &nbsp;
-<span style="color:green">[ ${loginUser.userName} ]</span>
+<span style="color:green">[ ${loginUser.login} ]</span>

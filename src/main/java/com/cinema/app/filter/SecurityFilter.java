@@ -48,14 +48,14 @@ public class SecurityFilter implements Filter {
         HttpServletRequest wrapRequest = request;
 
         if (loginUser != null) {
-//            User Name
-            String userName = loginUser.getUserName();
+//            Login
+            String login = loginUser.getLogin();
 
 //            Roles
             List<String> roles = loginUser.getRoles();
 
-//            Old request packet with new Request with userName and Roles information
-            wrapRequest = new UserRoleRequestWrapper(userName, roles, request);
+//            Old request packet with new Request with login and Roles information
+            wrapRequest = new UserRoleRequestWrapper(login, roles, request);
         }
 
 //         Pages requiring login
@@ -89,7 +89,7 @@ public class SecurityFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig fConfig) throws ServletException {
+    public void init(FilterConfig fConfig) {
 
     }
 

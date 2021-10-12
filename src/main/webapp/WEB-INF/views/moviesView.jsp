@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 
 <form name="movies">
 
-    <jsp:include page="menu1.jsp"></jsp:include>
+    <jsp:include page="menuAvailableToAllView.jsp"></jsp:include>
 
      <TABLE BORDER="1">
         <TR>

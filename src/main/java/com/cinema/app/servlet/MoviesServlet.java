@@ -26,7 +26,7 @@ public class MoviesServlet extends HttpServlet {
         request.setAttribute("list", list);
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/movies.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/moviesView.jsp");
         dispatcher.forward(request, response);
     }
 

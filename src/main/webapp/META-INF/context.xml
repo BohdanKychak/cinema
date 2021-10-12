@@ -15,7 +15,7 @@
          this timeout is exceeded.  Set to -1 to wait indefinitely.
          -->
 
-    <!-- username and password: MySQL username and password for database connections  -->
+    <!-- login and password: MySQL login and password for database connections  -->
 
     <!-- driverClassName: Class name for the old mm.mysql JDBC driver is
          org.gjt.mm.mysql.Driver - we recommend using Connector/J though.
@@ -29,7 +29,7 @@
                auth="Container"
                type="javax.sql.DataSource"
                maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-               username="javauser"
+               login="javauser"
                password="javadude"
                driverClassName="com.mysql.jdbc.Driver"
                url="jdbc:postgresql://localhost:5432/cinema"/>

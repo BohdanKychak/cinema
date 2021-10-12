@@ -25,7 +25,7 @@ public class UserDAO {
             // This user has a role as USER.
             UserAccount emp = new UserAccount(userLogin.get(i), userPassword.get(i), //
                     SecurityConfig.ROLE_USER);
-            mapUsers.put(emp.getUserName(), emp);
+            mapUsers.put(emp.getLogin(), emp);
         }
 
         role = "admin";
@@ -35,7 +35,7 @@ public class UserDAO {
             // This user has 2 roles USER and ADMIN.
             UserAccount mng = new UserAccount(adminLogin.get(i), adminPassword.get(i), //
                     SecurityConfig.ROLE_USER, SecurityConfig.ROLE_ADMIN);
-            mapUsers.put(mng.getUserName(), mng);
+            mapUsers.put(mng.getLogin(), mng);
         }
     }
 
