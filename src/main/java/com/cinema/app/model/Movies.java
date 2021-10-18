@@ -1,33 +1,43 @@
 package com.cinema.app.model;
 
 public class Movies {
-    private long id;
+    private long sessionId;
     private String movieTitle;
-    private String access;
-    private String movieTime;
-    private String movieDate;
+    private long movieId;
+    private String age;
+    private String poster;
+    private String sessionDate;
+    private String sessionTime;
     private double price;
     private int freePlaces;
     private long hallId;
 
-    public long getId() {
-        return id;
+    public long getSessionId() {
+        return sessionId;
     }
 
     public String getMovieTitle() {
         return movieTitle;
     }
 
-    public String getAccess() {
-        return access;
+    public long getMovieId() {
+        return movieId;
     }
 
-    public String getMovieTime() {
-        return movieTime;
+    public String getAge() {
+        return age;
     }
 
-    public String getMovieDate() {
-        return movieDate;
+    public String getPoster() {
+        return poster;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public String getSessionTime() {
+        return sessionTime;
     }
 
     public double getPrice() {
@@ -49,8 +59,8 @@ public class Movies {
             newMovies = new Movies();
         }
 
-        public Builder withId(long id) {
-            newMovies.id = id;
+        public Builder withSessionId(long sessionId) {
+            newMovies.sessionId = sessionId;
             return this;
         }
 
@@ -59,18 +69,28 @@ public class Movies {
             return this;
         }
 
-        public Builder withAccess(String access) {
-            newMovies.access = access;
+        public Builder withMovieId(long movieId) {
+            newMovies.movieId = movieId;
             return this;
         }
 
-        public Builder withMovieTime(String movieTime) {
-            newMovies.movieTime = movieTime;
+        public Builder withAge(String age) {
+            newMovies.age = age;
             return this;
         }
 
-        public Builder withMovieDate(String movieDate) {
-            newMovies.movieDate = movieDate;
+        public Builder withPoster(String poster){
+            newMovies.poster = poster;
+            return this;
+        }
+
+        public Builder withSessionDate(String sessionDate) {
+            newMovies.sessionDate = sessionDate;
+            return this;
+        }
+
+        public Builder withSessionTime(String sessionTime) {
+            newMovies.sessionTime = sessionTime;
             return this;
         }
 

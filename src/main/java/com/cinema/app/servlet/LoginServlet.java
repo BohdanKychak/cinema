@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cinema.app.model.UserAccount;
+import com.cinema.app.service.UserService;
 import com.cinema.app.utils.AppUtils;
-import com.cinema.app.dao.UserDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -40,17 +40,14 @@ public class LoginServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        UserAccount userAccount = UserDAO.findUser(login, password);
+        UserAccount userAccount = UserService.findUser(login, password);
 
         if (userAccount == null) {
             String errorMessage = "Invalid login or Password";
 
             request.setAttribute("errorMessage", errorMessage);
 
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
-
-            dispatcher.forward(request, response);
+            doGet(request, response);
             return;
         }
 
@@ -62,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception e) {
             log.severe(e.getMessage());
         }
-        String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
+        String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + "/userInfo"));
 
     }

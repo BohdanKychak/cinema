@@ -25,7 +25,7 @@ public class AppUtils {
         return (UserAccount) session.getAttribute("loginUser");
     }
 
-    public static int storeRedirectAfterLoginUrl(HttpSession session, String requestUri) {
+    public static int storeRedirectAfterLoginUrl(String requestUri) {
         Integer id = uri_id_map.get(requestUri);
 
         if (id == null) {
@@ -39,7 +39,7 @@ public class AppUtils {
         return id;
     }
 
-    public static String getRedirectAfterLoginUrl(HttpSession session, int redirectId) {
+    public static String getRedirectAfterLoginUrl(int redirectId) {
         return id_uri_map.get(redirectId);
     }
 

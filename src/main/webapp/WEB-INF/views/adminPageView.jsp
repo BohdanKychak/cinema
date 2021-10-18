@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <title>Admin Page</title>
-   </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+    <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
+</head>
 
-   <body>
+<body>
 
-      <jsp:include page="menuAdminView.jsp"></jsp:include>
+<jsp:include page="menuUserView.jsp"></jsp:include>
 
-      <h3>Admin Page</h3>
+<h3>Admin Page</h3>
 
-      Hello, This is a protected page!
+Hello! Here's what you can do:
 
-   </body>
+<p>
+    <a href="${pageContext.request.contextPath}/createAccount">
+        <span>Create Account</span>
+    </a>
+</p>
+<p>
+    <a href="${pageContext.request.contextPath}/scheduleChanges">
+        <span>Schedule Changes</span>
+    </a>
+</p>
+
+
+</body>
 </html>

@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().invalidate();
 
 //         Redirect to Homepage
-        response.sendRedirect(request.getContextPath() + "/");
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
 
     }
 

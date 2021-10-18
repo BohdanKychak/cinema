@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>CreateNewAccount</title>
+  <title>createAccount</title>
+  <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -11,9 +12,10 @@
 <h3>Create New Account</h3>
 
 
-<form method="POST" action="${pageContext.request.contextPath}/createNewAccount">
+<form method="POST" action="${pageContext.request.contextPath}/createAccount">
   <input type="hidden" name="redirectId" value="${param.redirectId}" />
   <table border="0">
+    <p style="color: chocolate">The password must be at least 8 characters long, at least one digit, at least one lowercase letter and one uppercase letter, and must not contain spaces.</p>
     <tr>
       Role: <select name="role">
       <option>admin</option>

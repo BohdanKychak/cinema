@@ -2,7 +2,7 @@ package com.cinema.app.model;
 
 import java.util.List;
 
-public class MoviesPage {
+public class SchedulePage {
 
     private Page page;
     private List<Movies> movies;

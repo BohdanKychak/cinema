@@ -1,7 +1,5 @@
 package com.cinema.app.dao;
 
-import com.cinema.app.utils.AccountUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,7 +8,7 @@ import java.util.logging.Logger;
 
 
 public class RegistrationDAO {
-    private static final Logger log = Logger.getLogger(AccountUtils.class.getName());
+    private static final Logger log = Logger.getLogger(AccountDAO.class.getName());
     private static final DBManager dbManager = DBManager.getInstance();
 
     public static boolean getRegistration(String login, String password, String role) {

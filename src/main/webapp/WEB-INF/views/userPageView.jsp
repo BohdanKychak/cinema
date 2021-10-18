@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <title>User Page</title>
+      <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
    </head>
    <body>
 
@@ -10,7 +11,7 @@
 
       <h3>User Page</h3>
 
-      Hello, user. You can find information about movies in our cinema in the "movies" tab!
+      Hello, ${loginUser.login}. You can find information about movies in our cinema in the "schedule" tab!
 
    </body>
 </html>

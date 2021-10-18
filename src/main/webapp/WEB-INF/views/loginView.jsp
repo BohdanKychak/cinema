@@ -3,6 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <title>Login</title>
+      <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
    </head>
    <body>
 

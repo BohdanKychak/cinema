@@ -14,8 +14,8 @@
   Info
 </a>
 ||
-<a href="${pageContext.request.contextPath}/movies">
-  Movies
+<a href="${pageContext.request.contextPath}/schedule">
+  Schedule
 </a>
 ||
 <a href="${pageContext.request.contextPath}/logout">

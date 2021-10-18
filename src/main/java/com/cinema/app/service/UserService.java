@@ -1,17 +1,16 @@
-package com.cinema.app.dao;
+package com.cinema.app.service;
 
-import java.util.ArrayList;
+import com.cinema.app.config.SecurityConfig;
+import com.cinema.app.dao.RegistrationDAO;
+import com.cinema.app.dao.AccountDAO;
+import com.cinema.app.model.UserAccount;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-import com.cinema.app.config.SecurityConfig;
-import com.cinema.app.model.UserAccount;
-import com.cinema.app.utils.AccountUtils;
-
-
-public class UserDAO {
-
+public class UserService {
     private static final Map<String, UserAccount> mapUsers = new HashMap<>();
 
     static {
@@ -21,8 +20,8 @@ public class UserDAO {
     private static void initUsers() {
 
         String role = "user";
-        List<String> userLogin = AccountUtils.getLogin(role);
-        List<String> userPassword = AccountUtils.getPassword(role);
+        List<String> userLogin = AccountDAO.getLogin(role);
+        List<String> userPassword = AccountDAO.getPassword(role);
 
         for (int i = 0; i < userLogin.size(); i++) {
             // This user has a role as USER.
@@ -32,8 +31,8 @@ public class UserDAO {
         }
 
         role = "admin";
-        List<String> adminLogin = AccountUtils.getLogin(role);
-        List<String> adminPassword = AccountUtils.getPassword(role);
+        List<String> adminLogin = AccountDAO.getLogin(role);
+        List<String> adminPassword = AccountDAO.getPassword(role);
         for (int i = 0; i < adminLogin.size(); i++) {
             // This user has 2 roles USER and ADMIN.
             UserAccount mng = new UserAccount(adminLogin.get(i), adminPassword.get(i), //
@@ -43,6 +42,7 @@ public class UserDAO {
     }
 
     // Find a User by login and password.
+
     public static UserAccount findUser(String login, String password) {
         UserAccount userAccount = mapUsers.get(login);
         if (userAccount != null && userAccount.getPassword().equals(password)) {
@@ -51,4 +51,14 @@ public class UserDAO {
         return null;
     }
 
+    public boolean createUser(String login, String password, String role) {
+
+        List<String> loginList = AccountDAO.getAllLogin();
+        for (String s : loginList) {
+            if (Objects.equals(login, s)) {
+                return false;
+            }
+        }
+        return RegistrationDAO.getRegistration(login, password, role);
+    }
 }

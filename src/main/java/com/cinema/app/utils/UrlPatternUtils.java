@@ -51,6 +51,6 @@ public class UrlPatternUtils {
                 return urlPattern;
             }
         }
-        return "/";
+        return "/index.jsp";
     }
 }
