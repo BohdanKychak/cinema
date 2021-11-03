@@ -1,5 +1,7 @@
 package com.cinema.app.servlet;
 
+import com.cinema.app.utils.Constants;
+
 import java.io.IOException;
 
 import javax.servlet.annotation.WebServlet;
@@ -7,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/logout")
+@WebServlet(Constants.URL_LOGOUT)
 public class LogoutServlet extends HttpServlet {
 
     public LogoutServlet() {
@@ -20,8 +22,7 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().invalidate();
 
 //         Redirect to Homepage
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
-
+        response.sendRedirect(request.getContextPath() + Constants.JSP_INDEX);
     }
 
     @Override

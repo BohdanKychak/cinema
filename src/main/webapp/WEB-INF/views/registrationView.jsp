@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,6 +24,10 @@
         <tr>
             <td>Password:</td>
             <td><input type="password" name="password" value= "${user.password}" /> </td>
+        </tr>
+        <tr>
+            <td>Bank account:</td>
+            <td><input type="text" name="bankAccount" value= "${user.bankAccount}" /> </td>
         </tr>
 
         <tr>

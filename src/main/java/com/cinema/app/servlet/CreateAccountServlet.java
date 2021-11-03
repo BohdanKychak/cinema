@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cinema.app.service.UserService;;
+import com.cinema.app.service.UserService;
+import com.cinema.app.utils.Constants;
 
-@WebServlet("/createAccount")
+@WebServlet(Constants.URL_CREATE_ACCOUNT)
 public class CreateAccountServlet extends HttpServlet {
 
     public CreateAccountServlet() {
@@ -22,7 +23,7 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/createAccountView.jsp");
+                = this.getServletContext().getRequestDispatcher(Constants.JSP_CREATE_ACCOUNT);
         dispatcher.forward(request, response);
     }
 
@@ -31,24 +32,21 @@ public class CreateAccountServlet extends HttpServlet {
             throws IOException, ServletException {
 
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
+        String login = request.getParameter(Constants.LOGIN);
+        String password = request.getParameter(Constants.PASSWORD);
+        String bankAccount = request.getParameter(Constants.BANK_ACCOUNT);
+        String role = request.getParameter(Constants.ROLE);
 
-        boolean correct = false;
-        if (RegistrationServlet.conditionsMet(login, password)) {
-            UserService userService = new UserService();
-            correct = userService.createUser(login, password, role);
-        }
-
+        boolean correct = RegistrationServlet.conditionsMet(login, password, bankAccount);
         if (correct) {
-            response.sendRedirect("/cinema/createAccount");
-        } else {
-            String errorMessage = "Error. Such a user exists or the specified data does not meet the conditions of registration";
-            request.setAttribute("errorMessage", errorMessage);
-            doGet(request, response);
+            UserService userService = new UserService();
+            correct = userService.createUser(login, password,bankAccount, role);
         }
 
+        if (!correct) {
+            request.setAttribute(Constants.ERROR_MASSAGE, Constants.ERROR_REGISTRATION);
+        }
+        doGet(request, response);
     }
 
 }

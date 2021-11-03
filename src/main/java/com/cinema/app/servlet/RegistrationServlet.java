@@ -1,7 +1,6 @@
 package com.cinema.app.servlet;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cinema.app.service.UserService;
+import com.cinema.app.utils.Constants;
 
-@WebServlet("/registration")
+@WebServlet(Constants.URL_REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
 
     public RegistrationServlet() {
@@ -24,7 +24,7 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/registrationView.jsp");
+                = this.getServletContext().getRequestDispatcher(Constants.JSP_REGISTRATION);
 
         dispatcher.forward(request, response);
     }
@@ -33,33 +33,29 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String role = "user";
+        String login = request.getParameter(Constants.LOGIN);
+        String password = request.getParameter(Constants.PASSWORD);
+        String bankAccount = request.getParameter(Constants.BANK_ACCOUNT);
 
-        boolean correct = false;
-        if (conditionsMet(login, password)) {
+        boolean correct = conditionsMet(login, password,bankAccount);
+        if (correct) {
             UserService userService = new UserService();
-            correct = userService.createUser(login, password, role);
+            correct = userService.createUser(login, password,bankAccount, Constants.USER);
         }
 
 
         if (correct) {
-            response.sendRedirect("/cinema/congratulations.jsp");
+            response.sendRedirect(Constants.JSP_CONGRATULATIONS);
         } else {
-            String errorMessage = "Error. Such a user exists or the specified data does not meet the conditions of registration";
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute(Constants.ERROR_MASSAGE, Constants.ERROR_REGISTRATION);
             doGet(request, response);
         }
     }
 
-    public static boolean conditionsMet(String login, String password) {
+    public static boolean conditionsMet(String login, String password, String bankAccount) {
         boolean conditionsMet = false;
-        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
-        if (password.matches(pattern)) {
-            if (!Objects.equals(login, "") && !Objects.equals(password, "")) {
+        if (!login.trim().isEmpty() && password.matches(Constants.PASSWORD_TERMS) && bankAccount.matches(Constants.BANK_ACCOUNT_TERMS)) {
                 conditionsMet = true;
-            }
         }
         return conditionsMet;
     }

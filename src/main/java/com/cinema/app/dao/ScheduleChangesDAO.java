@@ -1,10 +1,14 @@
 package com.cinema.app.dao;
 
+import com.cinema.app.utils.Constants;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static java.lang.String.format;
 
 public class ScheduleChangesDAO {
     private static final Logger log = Logger.getLogger(ScheduleChangesDAO.class.getName());
@@ -15,9 +19,7 @@ public class ScheduleChangesDAO {
         Connection connection = dbManager.getConnection();
 
         try {
-            String sql = "INSERT INTO schedule(movieId, sessionDate, sessionTime, price, freePlaces, hallId)" +
-                    "VALUES (?,?,?, 200.00, 40, 1);";
-            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_ADD_TO_SCHEDULE);
             prepareStatement.setLong(1, movieId);
             prepareStatement.setString(2, sessionDate);
             prepareStatement.setString(3, sessionTime);
@@ -41,8 +43,7 @@ public class ScheduleChangesDAO {
         Connection connection = dbManager.getConnection();
 
         try {
-            String sql = "DELETE FROM schedule WHERE id=?;";
-            PreparedStatement prepareStatement = connection.prepareStatement(sql);
+            PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_CANCEL_SESSION);
             prepareStatement.setLong(1, id);
             prepareStatement.execute();
 
@@ -59,16 +60,15 @@ public class ScheduleChangesDAO {
         boolean sessionExists = false;
         List<Long> list = Collections.emptyList();
         Connection connection = dbManager.getConnection();
-        String sql = "SELECT id FROM schedule;";
         Statement statement;
         ResultSet resultSet;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            resultSet = statement.executeQuery(Constants.SQL_SESSION_EXISTS);
 
             list = new ArrayList<>();
             while (resultSet.next()) {
-                Long sessionId = resultSet.getLong("id");
+                Long sessionId = resultSet.getLong(Constants.ID);
                 list.add(sessionId);
             }
         } catch (SQLException e) {
@@ -89,14 +89,14 @@ public class ScheduleChangesDAO {
     public static long getMovieId(String movieTitle) {
         long id = 0;
         Connection connection = dbManager.getConnection();
-        String sql = "SELECT id FROM movie WHERE movieTitle= '" + movieTitle + "' ;";
+        String sql = format(Constants.SQL_MOVIE_ID, movieTitle);
         Statement statement;
         ResultSet resultSet;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
             resultSet.next();
-            id = resultSet.getLong("id");
+            id = resultSet.getLong(Constants.ID);
         } catch (SQLException e) {
             log.severe(e.getMessage());
         } finally {

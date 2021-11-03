@@ -14,12 +14,13 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cinema.app.request.UserRoleRequestWrapper;
+import com.cinema.app.model.UserRoleRequest;
 import com.cinema.app.utils.AppUtils;
-import com.cinema.app.model.UserAccount;
+import com.cinema.app.model.Account;
+import com.cinema.app.utils.Constants;
 import com.cinema.app.utils.SecurityUtils;
 
-@WebFilter("/*")
+@WebFilter(Constants.URL_ANY)
 public class SecurityFilter implements Filter {
 
     public SecurityFilter() {
@@ -39,9 +40,9 @@ public class SecurityFilter implements Filter {
 
 //      User information stored in Session
 //      (After successful login)
-        UserAccount loginUser = AppUtils.getLoginUser(request.getSession());
+        Account loginUser = AppUtils.getLoginUser(request.getSession());
 
-        if (servletPath.equals("/login")) {
+        if (servletPath.equals(Constants.LOGIN)) {
             chain.doFilter(request, response);
             return;
         }
@@ -55,7 +56,7 @@ public class SecurityFilter implements Filter {
             List<String> roles = loginUser.getRoles();
 
 //            Old request packet with new Request with login and Roles information
-            wrapRequest = new UserRoleRequestWrapper(login, roles, request);
+            wrapRequest = new UserRoleRequest(login, roles, request);
         }
 
 //         Pages requiring login
@@ -69,7 +70,7 @@ public class SecurityFilter implements Filter {
 //                 Save the current page for redirection after successful login
                 int redirectId = AppUtils.storeRedirectAfterLoginUrl(requestUri);
 
-                response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
+                response.sendRedirect(wrapRequest.getContextPath() + Constants.LOGIN_REDIRECT_ID + redirectId);
                 return;
             }
 
@@ -78,7 +79,7 @@ public class SecurityFilter implements Filter {
             if (!hasPermission) {
 
                 RequestDispatcher dispatcher //
-                        = request.getServletContext().getRequestDispatcher("/WEB-INF/views/accessDeniedView.jsp");
+                        = request.getServletContext().getRequestDispatcher(Constants.JSP_ACCESS_DENIED);
 
                 dispatcher.forward(request, response);
                 return;

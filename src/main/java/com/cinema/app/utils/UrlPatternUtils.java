@@ -32,7 +32,7 @@ public class UrlPatternUtils {
 
         String urlPattern;
         if (pathInfo != null) {
-            urlPattern = servletPath + "/*";
+            urlPattern = servletPath + Constants.URL_ANY;
             return urlPattern;
         }
         urlPattern = servletPath;
@@ -51,6 +51,6 @@ public class UrlPatternUtils {
                 return urlPattern;
             }
         }
-        return "/index.jsp";
+        return Constants.JSP_INDEX;
     }
 }

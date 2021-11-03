@@ -1,4 +1,4 @@
-package com.cinema.app.request;
+package com.cinema.app.model;
 
 import java.security.Principal;
 import java.util.List;
@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 
-public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
+public class UserRoleRequest extends HttpServletRequestWrapper {
 
     private String user;
     private List<String> roles;
     private HttpServletRequest realRequest;
 
-    public UserRoleRequestWrapper(String user, List<String> roles, HttpServletRequest request) {
+    public UserRoleRequest(String user, List<String> roles, HttpServletRequest request) {
         super(request);
         this.user = user;
         this.roles = roles;

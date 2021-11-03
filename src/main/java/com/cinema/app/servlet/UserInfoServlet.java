@@ -1,5 +1,7 @@
 package com.cinema.app.servlet;
 
+import com.cinema.app.utils.Constants;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/userInfo")
+@WebServlet(Constants.URL_INFO)
 public class UserInfoServlet extends HttpServlet {
 
     public UserInfoServlet() {
@@ -20,8 +22,7 @@ public class UserInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/userInfoView.jsp");
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(Constants.JSP_INFO);
 
         dispatcher.forward(request, response);
     }

@@ -2,6 +2,7 @@ package com.cinema.app.servlet;
 
 import com.cinema.app.dao.ScheduleDAO;
 import com.cinema.app.model.Movies;
+import com.cinema.app.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +10,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;;
+import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/schedule")
+@WebServlet(Constants.URL_SCHEDULE)
 public class ScheduleServlet extends HttpServlet {
 
 
@@ -23,10 +24,10 @@ public class ScheduleServlet extends HttpServlet {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
         List<Movies> list = scheduleDAO.getSession();
 
-        request.setAttribute("list", list);
+        request.setAttribute(Constants.LIST, list);
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/scheduleView.jsp");
+                = this.getServletContext().getRequestDispatcher(Constants.JSP_SCHEDULE);
         dispatcher.forward(request, response);
     }
 

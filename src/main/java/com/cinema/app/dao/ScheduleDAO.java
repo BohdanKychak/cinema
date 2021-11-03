@@ -1,10 +1,13 @@
 package com.cinema.app.dao;
 
 import com.cinema.app.model.Movies;
+import com.cinema.app.utils.Constants;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,25 +22,27 @@ public class ScheduleDAO {
         ResultSet resultSet;
         Connection connection = dbManager.getConnection();
         // toDo position and limit
-        String sql;
         try {
-             sql =" SELECT s.id, m.movietitle, m.age, m.poster, s.sessionDate, s.sessionTime, s.price, s.freePlaces, s.hallId " +
-                     "FROM schedule s LEFT JOIN movie m ON m.id=s.movieId;";
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            resultSet = statement.executeQuery(Constants.SQL_SCHEDULE);
 
             list = new ArrayList<>();
             while (resultSet.next()) {
+                String date = resultSet.getString(Constants.SESSION_DATE);
+                String today = new SimpleDateFormat(Constants.DATA_TERMS).format(new Date());
+                if (date.compareTo(today) < 0) {
+                    continue;
+                }
                 Movies movies = new Movies.Builder()
-                        .withSessionId(resultSet.getLong("id"))
-                        .withMovieTitle(resultSet.getString("movieTitle"))
-                        .withAge(resultSet.getString("age"))
-                        .withPoster(resultSet.getString("poster"))
-                        .withSessionDate(resultSet.getString("sessionDate"))
-                        .withSessionTime(resultSet.getString("sessionTime"))
-                        .withPrice(resultSet.getDouble("price"))
-                        .withFreePlaces(resultSet.getInt("freePlaces"))
-                        .withHallId(resultSet.getLong("hallId")).build();
+                        .withSessionId(resultSet.getLong(Constants.ID))
+                        .withMovieTitle(resultSet.getString(Constants.MOVIE_TITLE))
+                        .withAge(resultSet.getString(Constants.AGE))
+                        .withPoster(resultSet.getString(Constants.POSTER))
+                        .withSessionDate(resultSet.getString(Constants.SESSION_DATE))
+                        .withSessionTime(resultSet.getString(Constants.SESSION_TIME))
+                        .withPrice(resultSet.getDouble(Constants.PRICE))
+                        .withFreePlaces(resultSet.getInt(Constants.FREE_PLACES))
+                        .withHallId(resultSet.getLong(Constants.HALL_ID)).build();
                 list.add(movies);
             }
         } catch (SQLException e) {
@@ -48,22 +53,20 @@ public class ScheduleDAO {
         return list;
     }
 
-    public List<Movies> getMovie(){
+    public List<Movies> getMovie() {
         List<Movies> list = Collections.emptyList();
         Statement statement;
         ResultSet resultSet;
         Connection connection = dbManager.getConnection();
         // toDo position and limit
-        String sql;
         try {
-            sql ="SELECT movieTitle FROM movie;";
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            resultSet = statement.executeQuery(Constants.SQL_MOVIE_TITLE);
 
             list = new ArrayList<>();
             while (resultSet.next()) {
                 Movies movies = new Movies.Builder()
-                        .withMovieTitle(resultSet.getString("movieTitle")).build();
+                        .withMovieTitle(resultSet.getString(Constants.MOVIE_TITLE)).build();
                 list.add(movies);
             }
         } catch (SQLException e) {

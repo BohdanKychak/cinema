@@ -1,5 +1,7 @@
 package com.cinema.app.servlet;
 
+import com.cinema.app.utils.Constants;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/userMenu")
-public class UserMenuServlet extends HttpServlet {
+@WebServlet(Constants.URL_USER)
+public class UserPageServlet extends HttpServlet {
 
-    public UserMenuServlet() {
+    public UserPageServlet() {
         super();
     }
 
@@ -22,7 +24,7 @@ public class UserMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/userPageView.jsp");
+                .getRequestDispatcher(Constants.JSP_USER);
 
         dispatcher.forward(request, response);
     }

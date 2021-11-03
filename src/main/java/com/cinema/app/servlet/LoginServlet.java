@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cinema.app.model.UserAccount;
+import com.cinema.app.model.Account;
 import com.cinema.app.service.UserService;
 import com.cinema.app.utils.AppUtils;
+import com.cinema.app.utils.Constants;
 
-@WebServlet("/login")
+@WebServlet(Constants.URL_LOGIN)
 public class LoginServlet extends HttpServlet {
 
     private static final Logger log = Logger.getLogger(LoginServlet.class.getName());
@@ -29,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                = this.getServletContext().getRequestDispatcher(Constants.JSP_LOGIN);
 
         dispatcher.forward(request, response);
     }
@@ -38,29 +39,26 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        UserAccount userAccount = UserService.findUser(login, password);
+        String login = request.getParameter(Constants.LOGIN);
+        String password = request.getParameter(Constants.PASSWORD);
+        Account account = UserService.findUser(login, password);
 
-        if (userAccount == null) {
-            String errorMessage = "Invalid login or Password";
-
-            request.setAttribute("errorMessage", errorMessage);
-
+        if (account == null) {
+            request.setAttribute(Constants.ERROR_MASSAGE, Constants.ERROR_INVALID_FIELDS);
             doGet(request, response);
             return;
         }
 
-        AppUtils.storeLoginUser(request.getSession(), userAccount);
+        AppUtils.storeLoginUser(request.getSession(), account);
 
         int redirectId = -1;
         try {
-            redirectId = Integer.parseInt(request.getParameter("redirectId"));
+            redirectId = Integer.parseInt(request.getParameter(Constants.REDIRECT_ID));
         } catch (Exception e) {
             log.severe(e.getMessage());
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
-        response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + "/userInfo"));
+        response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + Constants.URL_INFO));
 
     }
 

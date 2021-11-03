@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class UserAccount {
+public class Account {
 
     private String login;
     private String password;
+    private String bankAccount;
     private String role;
 
     private List<String> roles;
 
 
-    public UserAccount(String login, String password, String... roles) {
+    public Account(String login, String password, String bankAccount, String... roles) {
         this.login = login;
         this.password = password;
+        this.bankAccount = bankAccount;
 
         this.roles = new ArrayList<>();
         if (roles != null) {
@@ -37,6 +39,14 @@ public class UserAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
     }
 
     public String getRole() {

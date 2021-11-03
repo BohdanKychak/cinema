@@ -79,7 +79,7 @@ public class Movies {
             return this;
         }
 
-        public Builder withPoster(String poster){
+        public Builder withPoster(String poster) {
             newMovies.poster = poster;
             return this;
         }

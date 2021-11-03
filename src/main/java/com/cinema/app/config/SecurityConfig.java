@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SecurityConfig {
+import com.cinema.app.utils.Constants;
 
-    public static final String ROLE_ADMIN = "ADMIN";
-    public static final String ROLE_USER = "USER";
+public class SecurityConfig {
 
     private static final Map<String, List<String>> mapConfig = new HashMap<>();
 
@@ -22,20 +21,21 @@ public class SecurityConfig {
         // Configuration for the role "USER".
         List<String> urlPatterns1 = new ArrayList<>();
 
-        urlPatterns1.add("/userInfo");
-        urlPatterns1.add("/userMenu");
+        urlPatterns1.add(Constants.URL_INFO);
+        urlPatterns1.add(Constants.URL_USER);
 
-        mapConfig.put(ROLE_USER, urlPatterns1);
+        mapConfig.put(Constants.ROLE_USER, urlPatterns1);
 
         // Configuration for the role "ADMIN".
         List<String> urlPatterns2 = new ArrayList<>();
 
-        urlPatterns2.add("/userInfo");
-        urlPatterns2.add("/adminMenu");
-        urlPatterns2.add("/createAccount");
-        urlPatterns2.add("/scheduleChanges");
+        urlPatterns2.add(Constants.URL_INFO);
+        urlPatterns2.add(Constants.URL_USER);
+        urlPatterns2.add(Constants.URL_ADMIN);
+        urlPatterns2.add(Constants.URL_CREATE_ACCOUNT);
+        urlPatterns2.add(Constants.URL_SCHEDULE_CHANGES);
 
-        mapConfig.put(ROLE_ADMIN, urlPatterns2);
+        mapConfig.put(Constants.ROLE_ADMIN, urlPatterns2);
     }
 
     public static Set<String> getAllAppRoles() {

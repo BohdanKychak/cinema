@@ -8,8 +8,8 @@ import java.util.logging.Logger;
 
 public class ConnectionPool {
     private static final Logger log = Logger.getLogger(ConnectionPool.class.getName());
-    private final LinkedList<Connection> available = new LinkedList<>();
-    private final LinkedList<Connection> used = new LinkedList<>();
+    private final LinkedList<Connection> available;
+    private final LinkedList<Connection> used;
     private final String url;
     private final String user;
     private final String password;
@@ -18,20 +18,22 @@ public class ConnectionPool {
         this.url = url;
         this.user = user;
         this.password = password;
+        available = new LinkedList<>();
+        used = new LinkedList<>();
         for (int i = 0; i < initConnCnt; i++) {
             available.add(getConnection());
         }
     }
 
     private Connection getConnection() {
-        Connection con = null;
+        Connection connection = null;
         try {
-            con = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
             log.severe("Cannot obtain a connection from pool");
-            log.severe(e.getMessage());
+            log.severe(e.getMessage()); //NOPMD - suppressed GuardLogStatement - TODO explain reason for suppression
         }
-        return con;
+        return connection;
     }
 
     public Connection retrieve() {
