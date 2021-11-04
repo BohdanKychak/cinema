@@ -17,7 +17,6 @@ pageEncoding="UTF-8"%>
             <TH>-ID-</TH>
             <TH>movie title</TH>
             <TH>&emsp;age&emsp;</TH>
-            <TH>poster</TH>
             <TH>&emsp;date&emsp;</TH>
             <TH>time</TH>
             <TH>price</TH>
@@ -32,7 +31,6 @@ pageEncoding="UTF-8"%>
                 <td>${record.sessionId}</td>
                 <td>${record.movieTitle}</td>
                 <td>${record.age}</td>
-                <td>${record.poster}</td>
                 <td>${record.sessionDate}</td>
                 <td>${record.sessionTime}</td>
                 <td>${record.price}</td>

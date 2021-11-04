@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>successful registration</title>
+    <title>Successful registration</title>
     <link rel="icon" href="./img/icon.ico" type="image/x-icon">
 </head>
 <body>

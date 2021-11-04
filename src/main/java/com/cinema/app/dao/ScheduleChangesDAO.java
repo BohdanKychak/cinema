@@ -64,7 +64,7 @@ public class ScheduleChangesDAO {
         ResultSet resultSet;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(Constants.SQL_SESSION_EXISTS);
+            resultSet = statement.executeQuery(Constants.SQL_SESSION_ID);
 
             list = new ArrayList<>();
             while (resultSet.next()) {

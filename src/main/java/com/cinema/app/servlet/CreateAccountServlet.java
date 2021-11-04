@@ -40,11 +40,11 @@ public class CreateAccountServlet extends HttpServlet {
         boolean correct = RegistrationServlet.conditionsMet(login, password, bankAccount);
         if (correct) {
             UserService userService = new UserService();
-            correct = userService.createUser(login, password,bankAccount, role);
+            correct = userService.createUser(login, password, bankAccount, role);
         }
 
         if (!correct) {
-            request.setAttribute(Constants.ERROR_MASSAGE, Constants.ERROR_REGISTRATION);
+            request.setAttribute(Constants.MESSAGE, Constants.ERROR_REGISTRATION);
         }
         doGet(request, response);
     }

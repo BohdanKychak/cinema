@@ -23,6 +23,7 @@ public class SecurityConfig {
 
         urlPatterns1.add(Constants.URL_INFO);
         urlPatterns1.add(Constants.URL_USER);
+        urlPatterns1.add(Constants.URL_PURCHASE);
 
         mapConfig.put(Constants.ROLE_USER, urlPatterns1);
 
@@ -32,6 +33,7 @@ public class SecurityConfig {
         urlPatterns2.add(Constants.URL_INFO);
         urlPatterns2.add(Constants.URL_USER);
         urlPatterns2.add(Constants.URL_ADMIN);
+        urlPatterns2.add(Constants.URL_PURCHASE);
         urlPatterns2.add(Constants.URL_CREATE_ACCOUNT);
         urlPatterns2.add(Constants.URL_SCHEDULE_CHANGES);
 

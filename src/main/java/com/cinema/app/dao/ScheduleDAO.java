@@ -37,7 +37,6 @@ public class ScheduleDAO {
                         .withSessionId(resultSet.getLong(Constants.ID))
                         .withMovieTitle(resultSet.getString(Constants.MOVIE_TITLE))
                         .withAge(resultSet.getString(Constants.AGE))
-                        .withPoster(resultSet.getString(Constants.POSTER))
                         .withSessionDate(resultSet.getString(Constants.SESSION_DATE))
                         .withSessionTime(resultSet.getString(Constants.SESSION_TIME))
                         .withPrice(resultSet.getDouble(Constants.PRICE))

@@ -33,7 +33,7 @@
             </tr>
          </table>
       </form>
-      <i><p style="color: red;">${errorMessage}</p></i>
+      <i><p style="color: red;">${message}</p></i>
 
    </body>
 </html>

@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>scheduleChanges</title>
+    <title>Schedule Changes</title>
     <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
 </head>
 <body>
@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <td><p style="color:#c800ff">Cancel movie</p>
-                Enter the session number
+                Enter the session number for delete
             </td>
         </tr>
         <tr>
@@ -60,7 +60,7 @@
         </tr>
     </table>
 </form>
-<i><p style="color: red;">${errorMessage}</p></i>
+<i><p style="color: red;">${message}</p></i>
 
 </body>
 </html>

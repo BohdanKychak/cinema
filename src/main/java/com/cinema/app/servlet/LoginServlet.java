@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
         Account account = UserService.findUser(login, password);
 
         if (account == null) {
-            request.setAttribute(Constants.ERROR_MASSAGE, Constants.ERROR_INVALID_FIELDS);
+            request.setAttribute(Constants.MESSAGE, Constants.ERROR_INVALID_FIELDS);
             doGet(request, response);
             return;
         }

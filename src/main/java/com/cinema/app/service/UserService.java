@@ -58,6 +58,6 @@ public class UserService {
                 return false;
             }
         }
-        return RegistrationDAO.getRegistration(login, password,bankAccount, role);
+        return RegistrationDAO.getRegistration(login, password, bankAccount, role);
     }
 }

@@ -3,7 +3,6 @@ package com.cinema.app.servlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cinema.app.dao.ScheduleChangesDAO;
 import com.cinema.app.dao.ScheduleDAO;
-import com.cinema.app.model.Movies;
 import com.cinema.app.utils.Constants;
 
 @WebServlet(Constants.URL_SCHEDULE_CHANGES)
@@ -28,8 +26,7 @@ public class ScheduleChangesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
-        List<Movies> list = scheduleDAO.getMovie();
-        request.setAttribute(Constants.LIST, list);
+        request.setAttribute(Constants.LIST, scheduleDAO.getMovie());
         RequestDispatcher dispatcher
                 = this.getServletContext().getRequestDispatcher(Constants.JSP_SCHEDULE_CHANGES);
         dispatcher.forward(request, response);
@@ -46,7 +43,7 @@ public class ScheduleChangesServlet extends HttpServlet {
 
         boolean correct = false;
         int errorCode = 0;
-        if (id.matches(Constants.ID_TERMS)) {
+        if (id.matches(Constants.NUMERIC_TERMS)) {
             errorCode = 1;
             long sessionId = Long.parseLong(id);
             correct = ScheduleChangesDAO.getCancelSession(sessionId);
@@ -58,10 +55,10 @@ public class ScheduleChangesServlet extends HttpServlet {
                 correct = ScheduleChangesDAO.getAddToSchedule(movieId, sessionDate, sessionTime);
             }
         }
-        String errorMessage = getErrorMassage(errorCode);
+        String message = getErrorMassage(errorCode);
 
         if (!correct) {
-            request.setAttribute(Constants.ERROR_MASSAGE, errorMessage);
+            request.setAttribute(Constants.MESSAGE, message);
         }
         doGet(request, response);
 

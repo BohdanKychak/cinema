@@ -6,8 +6,6 @@ import java.sql.*;
 
 import java.util.logging.Logger;
 
-import static java.lang.String.format;
-
 
 public class RegistrationDAO {
     private static final Logger log = Logger.getLogger(AccountDAO.class.getName());
@@ -28,7 +26,7 @@ public class RegistrationDAO {
             prepareStatement = connection.prepareStatement(Constants.SQL_ADD_ACCOUNT);
             prepareStatement.setString(1, bankAccount);
             prepareStatement.setDouble(2, getRandomMoney());
-            prepareStatement.setLong(3, getUserId(login, connection));
+            prepareStatement.setLong(3, getUserId(connection));
             prepareStatement.execute();
             stagesOfRegistration++;
 
@@ -45,14 +43,13 @@ public class RegistrationDAO {
         return true;
     }
 
-    private static long getUserId(String login, Connection connection) {
+    private static long getUserId(Connection connection) {
         long id = 0;
-        String sql = format(Constants.SQL_USER_ID, login);
         Statement statement;
         ResultSet resultSet;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(sql);
+            resultSet = statement.executeQuery(Constants.SQL_MAX_USER_ID);
             resultSet.next();
             id = resultSet.getLong(Constants.ID);
         } catch (SQLException e) {

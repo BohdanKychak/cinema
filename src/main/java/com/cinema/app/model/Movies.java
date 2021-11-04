@@ -5,7 +5,6 @@ public class Movies {
     private String movieTitle;
     private long movieId;
     private String age;
-    private String poster;
     private String sessionDate;
     private String sessionTime;
     private double price;
@@ -26,10 +25,6 @@ public class Movies {
 
     public String getAge() {
         return age;
-    }
-
-    public String getPoster() {
-        return poster;
     }
 
     public String getSessionDate() {
@@ -79,11 +74,6 @@ public class Movies {
             return this;
         }
 
-        public Builder withPoster(String poster) {
-            newMovies.poster = poster;
-            return this;
-        }
-
         public Builder withSessionDate(String sessionDate) {
             newMovies.sessionDate = sessionDate;
             return this;
@@ -115,5 +105,3 @@ public class Movies {
 
     }
 }
-
-

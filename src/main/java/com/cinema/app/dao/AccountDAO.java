@@ -33,7 +33,7 @@ public class AccountDAO {
         return getInfo(password, Constants.PASSWORD);
     }
 
-    private static List<String> getInfo(String sql, String info) {
+    public static List<String> getInfo(String sql, String info) {
         List<String> list = new ArrayList<>();
         Connection connection = dbManager.getConnection();
         Statement statement;

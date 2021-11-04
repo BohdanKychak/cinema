@@ -3,14 +3,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>createAccount</title>
+  <title>Create Account</title>
   <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
 </head>
 <body>
 
 <jsp:include page="menuAvailableToAllView.jsp"></jsp:include>
 
-<h3>Create New Account</h3>
+<h3>Create Account</h3>
 
 
 <form method="POST" action="${pageContext.request.contextPath}/createAccount">
@@ -43,7 +43,7 @@
     </tr>
   </table>
 </form>
-<i><p style="color: red;">${errorMessage}</p></i>
+<i><p style="color: red;">${message}</p></i>
 
 </body>
 </html>

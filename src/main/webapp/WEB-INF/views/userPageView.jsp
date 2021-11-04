@@ -14,5 +14,11 @@
 
       Hello, ${loginUser.login}. You can find information about movies in our cinema in the "schedule" tab!
 
+      <p>
+          <a href="${pageContext.request.contextPath}/purchase">
+              <span>Purchase ticket</span>
+          </a>
+      </p>
+
    </body>
 </html>
