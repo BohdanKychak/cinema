@@ -51,7 +51,7 @@ public class RegistrationDAO {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(Constants.SQL_MAX_USER_ID);
             resultSet.next();
-            id = resultSet.getLong(Constants.ID);
+            id = resultSet.getLong(Constants.MAX_ID);
         } catch (SQLException e) {
             log.severe(e.getMessage());
         }

@@ -2,6 +2,8 @@ package com.cinema.app.servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -38,7 +40,6 @@ public class ScheduleChangesServlet extends HttpServlet {
 
         String id = request.getParameter(Constants.ID);
         String movieTitle = request.getParameter(Constants.MOVIE_TITLE);
-        String sessionDate = request.getParameter(Constants.SESSION_DATE);
         String sessionTime = request.getParameter(Constants.SESSION_TIME);
 
         boolean correct = false;
@@ -47,12 +48,15 @@ public class ScheduleChangesServlet extends HttpServlet {
             errorCode = 1;
             long sessionId = Long.parseLong(id);
             correct = ScheduleChangesDAO.getCancelSession(sessionId);
-        } else if (!movieTitle.trim().isEmpty() && !sessionDate.trim().isEmpty() && !sessionTime.trim().isEmpty()) {
+        } else if (!movieTitle.trim().isEmpty() && !sessionTime.trim().isEmpty()) {
             errorCode = 2;
-            String today = new SimpleDateFormat(Constants.DATA_TERMS).format(new Date());
-            if (sessionDate.compareTo(today) > 0) {
-                long movieId = ScheduleChangesDAO.getMovieId(movieTitle);
-                correct = ScheduleChangesDAO.getAddToSchedule(movieId, sessionDate, sessionTime);
+            sessionTime = getSessionTime(sessionTime);
+            if(sessionTime != null) {
+                String today = new SimpleDateFormat(Constants.TIMESTAMP_TERMS).format(new Date());
+                if (sessionTime.compareTo(today) > 0) {
+                    long movieId = ScheduleChangesDAO.getMovieId(movieTitle);
+                    correct = ScheduleChangesDAO.getAddToSchedule(movieId, sessionTime);
+                }
             }
         }
         String message = getErrorMassage(errorCode);
@@ -61,6 +65,17 @@ public class ScheduleChangesServlet extends HttpServlet {
             request.setAttribute(Constants.MESSAGE, message);
         }
         doGet(request, response);
+
+    }
+
+    private String getSessionTime(String sessionTime) {
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(sessionTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.TIMESTAMP_TERMS);
+            return localDateTime.format(formatter); // "1986-04-08 12:30"
+        } catch (Exception e){
+            return null;
+        }
 
     }
 

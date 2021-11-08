@@ -36,8 +36,7 @@
                         </c:forEach>
                     </c:if>
                 </select>
-                    Date: <input type="date" name="sessionDate">
-                    Time: <input type="time" name="sessionTime" value="9:01" min="09:00" max="22:00">
+                    Date and time: <input type="datetime-local" name="sessionTime">
                 </td>
             </form>
         </tr>

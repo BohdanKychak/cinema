@@ -1,5 +1,7 @@
 package com.cinema.app.dao;
 
+import com.cinema.app.utils.Constants;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.LinkedList;
@@ -30,8 +32,8 @@ public class ConnectionPool {
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
-            log.severe("Cannot obtain a connection from pool");
-            log.severe(e.getMessage()); //NOPMD - suppressed GuardLogStatement - TODO explain reason for suppression
+            log.severe(Constants.ERROR_CONNECTION);
+            log.severe(e.getMessage());
         }
         return connection;
     }
@@ -53,7 +55,7 @@ public class ConnectionPool {
             if (used.remove(c)) {
                 available.add(c);
             } else {
-                throw new IllegalStateException("Connection not in the used array");
+                throw new IllegalStateException(Constants.ERROR_PUT_BACK);
             }
         }
     }

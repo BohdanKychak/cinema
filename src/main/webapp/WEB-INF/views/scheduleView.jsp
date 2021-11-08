@@ -8,37 +8,131 @@ pageEncoding="UTF-8"%>
     <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
 </head>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <form name="schedule">
 
     <jsp:include page="menuAvailableToAllView.jsp"></jsp:include>
 
-     <TABLE BORDER="1">
+    <TABLE BORDER="1">
         <TR>
             <TH>-ID-</TH>
             <TH>movie title</TH>
             <TH>&emsp;age&emsp;</TH>
-            <TH>&emsp;date&emsp;</TH>
-            <TH>time</TH>
+            <TH>date/time</TH>
             <TH>price</TH>
             <TH>free places</TH>
             <TH>hall<br>number</TH>
         </TR>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${not empty list}">
-        <c:forEach items="${list}" var="record">
-            <tr>
-                <td>${record.sessionId}</td>
-                <td>${record.movieTitle}</td>
-                <td>${record.age}</td>
-                <td>${record.sessionDate}</td>
-                <td>${record.sessionTime}</td>
-                <td>${record.price}</td>
-                <td>${record.freePlaces}</td>
-                <td>${record.hallId}</td>
-            </tr>
-        </c:forEach>
-     </TABLE>
-</c:if>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
- </form>
+        <c:if test="${not empty schedulePage.movies}">
+            <c:forEach items="${schedulePage.movies}" var="record">
+                <tr>
+                    <td>${record.sessionId}</td>
+                    <td>${record.movieTitle}</td>
+                    <td>${record.age}</td>
+                    <td>${record.sessionTime}</td>
+                    <td>${record.price}</td>
+                    <td>${record.freePlaces}</td>
+                    <td>${record.hallId}</td>
+                </tr>
+            </c:forEach>
+        </c:if>
+    </TABLE>
+
+    <tr>
+        Page size
+        <select name="pageSize">
+             <option <c:if test="${schedulePage.page.pageSize eq 5}">selected="selected"</c:if>>5</option>
+             <option <c:if test="${schedulePage.page.pageSize eq 10}">selected="selected"</c:if>>10</option>
+             <option <c:if test="${schedulePage.page.pageSize eq 20}">selected="selected"</c:if>>20</option>
+        </select>
+        <input type="submit" value= "Submit" />
+    </tr>
+
+    <c:set var="sortA" value="schedule?pageSize=${schedulePage.page.pageSize}&sort="/>
+    <c:set var="sortB" value="schedule?pageSize=${schedulePage.page.pageSize}&sort=${schedulePage.sortBy.sort}&sortOrder="/>
+
+    <div>
+        Sort by:
+        &emsp;
+        <a href="${sortA}m.movieTitle">movie title</a>
+        --
+        <a href="${sortA}s.sessionTime">date/time</a>
+        --
+        <a href="${sortA}s.freePlaces">free places</a>
+        &emsp;
+        ||
+        &emsp;
+        <a href="${sortB}ASC">sort ascending</a>
+        --
+        <a href="${sortB}DESC">sort descending</a>
+    </div>
+
+    <c:set var="filter" value="schedule?pageSize=${schedulePage.page.pageSize}&sort=${schedulePage.sortBy.sort}&sortOrder=${schedulePage.sortBy.sortOrder}&filterAge="/>
+
+    <div>
+        Filter by age:
+        &emsp;
+        <a href="${filter}">show all</a>
+        --
+        <a href="${filter}6">6+</a>
+        --
+        <a href="${filter}12">12+</a>
+        --
+        <a href="${filter}16">16+</a>
+    </div>
+
+    <br>
+    <div class="pagination">
+        <c:set var="url" value="schedule?pageSize=${schedulePage.page.pageSize}&sort=${schedulePage.sortBy.sort}&sortOrder=${schedulePage.sortBy.sortOrder}&filterAge=${schedulePage.sortBy.filterAge}&position="/>
+        <c:set var="a" value="${schedulePage.page.pageSize * 2}"/>
+        <c:set var="b" value="${schedulePage.page.total - schedulePage.page.pageSize}"/>
+        <c:set var="d" value="${schedulePage.page.total - schedulePage.page.pageSize - a}"/>
+        <c:set var="e" value="${schedulePage.page.numberOfPages * schedulePage.page.pageSize}"/>
+        <c:set var="f" value="${schedulePage.page.total - a}"/>
+        <fmt:formatNumber var="c" value="${schedulePage.page.position / schedulePage.page.pageSize}" pattern="#"/>
+
+        <c:if test="${schedulePage.page.position > 0}">
+            <a href="${url}${schedulePage.page.position - schedulePage.page.pageSize}">&laquo;</a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position > schedulePage.page.pageSize}">
+            <a href="${url}0">1</a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position > a}">
+            <a>...</a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position > 0}">
+            <a href="${url}${schedulePage.page.position - schedulePage.page.pageSize}">
+                ${c}
+            </a>
+        </c:if>
+
+        <a>${c + 1}</a>
+
+        <c:if test="${schedulePage.page.position < b}">
+            <a href="${url}${schedulePage.page.position + schedulePage.page.pageSize}">
+                ${c + 2}
+             </a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position < d}">
+            <a>...</a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position < f}">
+            <a href="${url}${e - schedulePage.page.pageSize}">${schedulePage.page.numberOfPages}</a>
+        </c:if>
+
+        <c:if test="${schedulePage.page.position < b}">
+            <a href="${url}${schedulePage.page.position + schedulePage.page.pageSize}">&raquo;</a>
+        </c:if>
+
+    </div>
+
+</form>
+

@@ -19,33 +19,13 @@ public class PlaceDAO {
 
 
     public static boolean existsId(long sessionId) {
-        List<Long> allIdList = getSessionId();
+        List<Long> allIdList = ScheduleDAO.getId(Constants.SQL_SESSION_ID);
         for (long id : allIdList) {
             if (sessionId == id) {
                 return true;
             }
         }
         return false;
-    }
-
-    private static List<Long> getSessionId() {
-        List<Long> list = Collections.emptyList();
-        Statement statement;
-        ResultSet resultSet;
-        Connection connection = dbManager.getConnection();
-        try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(Constants.SQL_SESSION_ID);
-            list = new ArrayList<>();
-            while (resultSet.next()) {
-                list.add(resultSet.getLong(Constants.ID));
-            }
-        } catch (SQLException e) {
-            log.severe(e.getMessage());
-        } finally {
-            dbManager.commit(connection);
-        }
-        return list;
     }
 
     public static String getMessageAboutPlace(String sessionId) {
@@ -61,7 +41,7 @@ public class PlaceDAO {
         for (int place = Constants.MIN_SEATS_HALL; place <= Constants.MAX_SEATS_HALL; place++) {
             boolean free = true;
             for (String str : occupiedSeatsList) {
-                if (str.equals("" + place)) {
+                if (str.equals(Integer.toString(place))) {
                     free = false;
                     occupiedSeats++;
                     break;

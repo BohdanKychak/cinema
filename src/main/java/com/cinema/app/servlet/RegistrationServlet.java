@@ -53,11 +53,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     public static boolean conditionsMet(String login, String password, String bankAccount) {
-        boolean conditionsMet = false;
-        if (!login.trim().isEmpty() && password.matches(Constants.PASSWORD_TERMS) && bankAccount.matches(Constants.BANK_ACCOUNT_TERMS)) {
-            conditionsMet = true;
-        }
-        return conditionsMet;
+        return !login.trim().isEmpty() && password.matches(Constants.PASSWORD_TERMS) && bankAccount.matches(Constants.BANK_ACCOUNT_TERMS);
     }
 
 }

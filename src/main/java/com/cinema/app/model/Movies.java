@@ -3,10 +3,10 @@ package com.cinema.app.model;
 public class Movies {
     private long sessionId;
     private String movieTitle;
-    private long movieId;
     private String age;
-    private String sessionDate;
+
     private String sessionTime;
+
     private double price;
     private int freePlaces;
     private long hallId;
@@ -19,16 +19,8 @@ public class Movies {
         return movieTitle;
     }
 
-    public long getMovieId() {
-        return movieId;
-    }
-
     public String getAge() {
         return age;
-    }
-
-    public String getSessionDate() {
-        return sessionDate;
     }
 
     public String getSessionTime() {
@@ -64,21 +56,12 @@ public class Movies {
             return this;
         }
 
-        public Builder withMovieId(long movieId) {
-            newMovies.movieId = movieId;
-            return this;
-        }
-
         public Builder withAge(String age) {
             newMovies.age = age;
             return this;
         }
 
-        public Builder withSessionDate(String sessionDate) {
-            newMovies.sessionDate = sessionDate;
-            return this;
-        }
-
+        //
         public Builder withSessionTime(String sessionTime) {
             newMovies.sessionTime = sessionTime;
             return this;

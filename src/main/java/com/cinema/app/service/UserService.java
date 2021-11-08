@@ -43,6 +43,7 @@ public class UserService {
     // Find a User by login and password.
 
     public static Account findUser(String login, String password) {
+        initUsers();
         Account account = mapUsers.get(login);
         if (account != null && account.getPassword().equals(password)) {
             return account;

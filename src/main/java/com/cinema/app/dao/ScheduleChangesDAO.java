@@ -14,15 +14,14 @@ public class ScheduleChangesDAO {
     private static final Logger log = Logger.getLogger(ScheduleChangesDAO.class.getName());
     private static final DBManager dbManager = DBManager.getInstance();
 
-    public static boolean getAddToSchedule(long movieId, String sessionDate, String sessionTime) {
+    public static boolean getAddToSchedule(long movieId, String sessionTime) {
 
         Connection connection = dbManager.getConnection();
 
         try {
             PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_ADD_TO_SCHEDULE);
             prepareStatement.setLong(1, movieId);
-            prepareStatement.setString(2, sessionDate);
-            prepareStatement.setString(3, sessionTime);
+            prepareStatement.setTimestamp(2, Timestamp.valueOf(sessionTime));
             prepareStatement.execute();
 
         } catch (SQLException e) {
