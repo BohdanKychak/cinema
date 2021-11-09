@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<%@ page session ="true" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="languages/messages"/>
+
+<html lang="${cookie['lang'].value}">
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="icon" href="./img/icon.ico" type="image/x-icon">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title><fmt:message key="main.title" /></title>
+        <link rel="icon" href="./img/icon.ico" type="image/x-icon">
+        <style>
+            <%@include file="WEB-INF/views/css/indexStyle.css" %>
+        </style>
+    </head>
+    <body>
+        <jsp:include page="WEB-INF/views/menuView.jsp"></jsp:include>
 
-<jsp:include page="WEB-INF/views/menuUnknownUserView.jsp"></jsp:include>
+        <div class="colored">
+            <h1>
+                <fmt:message key="main.welcome" />
+            </h1>
+        </div>
+        <p style="color: #4206a2;">
+            <fmt:message key="main.text" />
+        </p>
 
-<h3>Home Page</h3>
-
-<h2><p style="color: #82007c">Welcome to our cinema!</p></h2>
-<p style="color: #4206a2;">Click the "Schedule" tab to view movie sessions. <br/>
-    To buy a ticket you need to register or log in to an existing account and make a purchase.</p>
-</body>
+    </body>
 </html>

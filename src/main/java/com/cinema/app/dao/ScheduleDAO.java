@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import static java.lang.String.format;
 
@@ -45,7 +45,7 @@ public class ScheduleDAO {
                     .withMovies(list).build();
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -95,7 +95,7 @@ public class ScheduleDAO {
                 list.add(movies);
             }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -111,15 +111,16 @@ public class ScheduleDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(format(Constants.SQL_TOTAL, getToday(), filterTotal));
-            resultSet.next();
-            total = resultSet.getInt(Constants.TOTAL);
+            if (resultSet.next()) {
+                total = resultSet.getInt(Constants.TOTAL);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         }
         return total;
     }
 
-    private static String getToday() {
+    public static String getToday() {
         return new SimpleDateFormat(Constants.DATA_TIME_TERMS).format(new Date());
     }
 
@@ -146,7 +147,7 @@ public class ScheduleDAO {
                 list.add(resultSet.getLong(Constants.ID));
             }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }

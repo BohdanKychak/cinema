@@ -4,7 +4,7 @@ import com.cinema.app.utils.Constants;
 
 import java.sql.*;
 
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 
 public class RegistrationDAO {
@@ -32,7 +32,7 @@ public class RegistrationDAO {
 
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
             return false;
         } finally {
             dbManager.commit(connection);
@@ -50,10 +50,11 @@ public class RegistrationDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(Constants.SQL_MAX_USER_ID);
-            resultSet.next();
-            id = resultSet.getLong(Constants.MAX_ID);
+            if (resultSet.next()) {
+                id = resultSet.getLong(Constants.MAX_ID);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         }
         return id;
     }
@@ -64,7 +65,7 @@ public class RegistrationDAO {
             prepareStatement.setString(1, login);
             prepareStatement.execute();
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 

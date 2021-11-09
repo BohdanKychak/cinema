@@ -9,14 +9,13 @@ public class Account {
     private String login;
     private String password;
     private String role;
+    private final List<String> roles;
 
-    private List<String> roles;
 
-
-    public Account(String login, String password, String... roles) {
+    public Account(String login, String password, String role, String... roles) {
         this.login = login;
         this.password = password;
-
+        this.role = role;
         this.roles = new ArrayList<>();
         if (roles != null) {
             Collections.addAll(this.roles, roles);
@@ -49,9 +48,5 @@ public class Account {
 
     public List<String> getRoles() {
         return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
     }
 }

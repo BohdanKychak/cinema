@@ -1,6 +1,6 @@
 package com.cinema.app.servlet;
 
-import com.cinema.app.dao.PlaceDAO;
+import com.cinema.app.service.PlaceService;
 import com.cinema.app.dao.PurchaseDAO;
 import com.cinema.app.utils.AppUtils;
 import com.cinema.app.utils.Constants;
@@ -52,7 +52,7 @@ public class PurchaseServlet extends HttpServlet {
 
     private String workWithData(String id, String place, String login) {
         long sessionId = Long.parseLong(id);
-        if (PlaceDAO.existsId(sessionId)) {
+        if (PlaceService.existsId(sessionId)) {
             if (place.matches(Constants.NUMERIC_TERMS)) {
                 int placeNumber = Integer.parseInt(place);
                 if (placeNumber < Constants.MIN_SEATS_HALL || placeNumber > Constants.MAX_SEATS_HALL) {
@@ -60,7 +60,7 @@ public class PurchaseServlet extends HttpServlet {
                 }
                 return PurchaseDAO.getPurchaseCode(sessionId, place, login);
             } else {
-                return PlaceDAO.getMessageAboutPlace(id);
+                return PlaceService.getMessageAboutPlace(id);
             }
         }
         return null;

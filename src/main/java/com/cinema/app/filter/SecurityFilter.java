@@ -52,11 +52,14 @@ public class SecurityFilter implements Filter {
 //            Login
             String login = loginUser.getLogin();
 
+//            Role
+            String role = loginUser.getRole();
+
 //            Roles
             List<String> roles = loginUser.getRoles();
 
 //            Old request packet with new Request with login and Roles information
-            wrapRequest = new UserRoleRequest(login, roles, request);
+            wrapRequest = new UserRoleRequest(login, role, roles, request);
         }
 
 //         Pages requiring login

@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 public class UserRoleRequest extends HttpServletRequestWrapper {
 
-    private String user;
-    private List<String> roles;
-    private HttpServletRequest realRequest;
+    private final String user;
+    private final String role;
+    private final List<String> roles;
+    private final HttpServletRequest realRequest;
 
-    public UserRoleRequest(String user, List<String> roles, HttpServletRequest request) {
+    public UserRoleRequest(String user, String role, List<String> roles, HttpServletRequest request) {
         super(request);
         this.user = user;
+        this.role = role;
         this.roles = roles;
         this.realRequest = request;
     }

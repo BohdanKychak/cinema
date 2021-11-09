@@ -51,7 +51,7 @@ public class ScheduleChangesServlet extends HttpServlet {
         } else if (!movieTitle.trim().isEmpty() && !sessionTime.trim().isEmpty()) {
             errorCode = 2;
             sessionTime = getSessionTime(sessionTime);
-            if(sessionTime != null) {
+            if (sessionTime != null) {
                 String today = new SimpleDateFormat(Constants.TIMESTAMP_TERMS).format(new Date());
                 if (sessionTime.compareTo(today) > 0) {
                     long movieId = ScheduleChangesDAO.getMovieId(movieTitle);
@@ -73,7 +73,7 @@ public class ScheduleChangesServlet extends HttpServlet {
             LocalDateTime localDateTime = LocalDateTime.parse(sessionTime);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.TIMESTAMP_TERMS);
             return localDateTime.format(formatter); // "1986-04-08 12:30"
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
 

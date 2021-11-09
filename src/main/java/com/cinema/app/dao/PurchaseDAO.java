@@ -4,7 +4,7 @@ import com.cinema.app.utils.Constants;
 
 import java.sql.*;
 
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import static java.lang.String.format;
 
@@ -50,7 +50,7 @@ public class PurchaseDAO {
             moneyTransactions(connection, money, userId);
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -66,7 +66,7 @@ public class PurchaseDAO {
             moneyTransactions(connection, money, Constants.CINEMA_ID);
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -95,7 +95,7 @@ public class PurchaseDAO {
             prepareStatement.execute();
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
             return false;
         } finally {
             dbManager.commit(connection);
@@ -115,10 +115,11 @@ public class PurchaseDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            id = resultSet.getLong(Constants.ID);
+            if (resultSet.next()) {
+                id = resultSet.getLong(Constants.ID);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -133,10 +134,11 @@ public class PurchaseDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            money = resultSet.getDouble(Constants.MONEY);
+            if (resultSet.next()) {
+                money = resultSet.getDouble(Constants.MONEY);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -151,10 +153,11 @@ public class PurchaseDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(format(Constants.SQL_GET_FREE_PLACES, id));
-            resultSet.next();
-            places = resultSet.getInt(Constants.FREE_PLACES);
+            if (resultSet.next()) {
+                places = resultSet.getInt(Constants.FREE_PLACES);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }

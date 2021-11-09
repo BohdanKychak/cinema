@@ -1,25 +1,17 @@
-package com.cinema.app.dao;
+package com.cinema.app.service;
 
+import com.cinema.app.dao.AccountDAO;
+import com.cinema.app.dao.ScheduleDAO;
 import com.cinema.app.utils.Constants;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static java.lang.String.format;
 
-public class PlaceDAO {
-    private static final Logger log = Logger.getLogger(PlaceDAO.class.getName());
-    private static final DBManager dbManager = DBManager.getInstance();
-
+public class PlaceService {
 
     public static boolean existsId(long sessionId) {
-        List<Long> allIdList = ScheduleDAO.getId(Constants.SQL_SESSION_ID);
+        List<Long> allIdList = ScheduleDAO.getId(format(Constants.SQL_SESSION_ID, ScheduleDAO.getToday()));
         for (long id : allIdList) {
             if (sessionId == id) {
                 return true;

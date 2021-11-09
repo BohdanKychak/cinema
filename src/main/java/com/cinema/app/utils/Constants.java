@@ -41,6 +41,9 @@ public final class Constants {
     public static final String DEFAULT_SORT = "s.sessionTime";
     public static final String DEFAULT_SORT_ORDER = "ASC";
     public static final String EMPTY = "";
+    public static final String LANG = "lang";
+    public static final String COOKIE_LOCALE = "cookieLocale";
+    public static final String COOKIE_LOCALE_FILTER = "CookieLocaleFilter";
 
     public static final String SQL_LOGIN = "SELECT login FROM account WHERE role='%s';";
     public static final String SQL_PASSWORD = "SELECT password FROM account WHERE role='%s';";
@@ -48,10 +51,10 @@ public final class Constants {
     public static final String SQL_ADD_ACCOUNT = "INSERT INTO bankAccount (accountNumber, money, userId) VALUES (?,?,?);";
     public static final String SQL_DELETE_USER = "DELETE FROM account WHERE login= ?;";
     public static final String SQL_SCHEDULE = "SELECT s.id, m.movieTitle, m.age, s.sessionTime, s.price, s.freePlaces, s.hallId " +
-                                            "FROM schedule s LEFT JOIN movie m ON m.id=s.movieId " +
-                                            "WHERE s.sessionTime > '%s' %s ORDER BY %s %s LIMIT %d OFFSET %d;";
+            "FROM schedule s LEFT JOIN movie m ON m.id=s.movieId " +
+            "WHERE s.sessionTime > '%s' %s ORDER BY %s %s LIMIT %d OFFSET %d;";
     public static final String SQL_MOVIE_TITLE = "SELECT movieTitle FROM movie;";
-    public static final String SQL_SESSION_ID = "SELECT id FROM schedule;";
+    public static final String SQL_SESSION_ID = "SELECT id FROM schedule WHERE sessionTime > '%s';";
     public static final String SQL_ADD_TO_SCHEDULE = "INSERT INTO schedule(movieId, sessionTime, price, freePlaces, hallId) VALUES (?,?, " + PRICE_OF_SESSION + ", " + MAX_SEATS_HALL + ", " + HALL + ");";
     public static final String SQL_CANCEL_SESSION = "DELETE FROM schedule WHERE id=?;";
     public static final String SQL_MOVIE_ID = "SELECT id FROM movie WHERE movieTitle= '%s';";
@@ -109,7 +112,7 @@ public final class Constants {
     public static final String URL_SCHEDULE_CHANGES = "/scheduleChanges";
 
     public static final String JSP_INDEX = "/index.jsp";
-    public static final String JSP_ACCESS_DENIED = "/WEB-INF/views/accessDeniedView.jsp";
+    public static final String JSP_ACCESS_DENIED = "/accessDenied.jsp";
     public static final String JSP_LOGIN = "/WEB-INF/views/loginView.jsp";
     public static final String JSP_INFO = "/WEB-INF/views/userInfoView.jsp";
     public static final String JSP_USER = "/WEB-INF/views/userPageView.jsp";

@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<%@ page session ="true" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="languages/messages"/>
+
+<html lang="${cookie['lang'].value}">
 <html>
    <head>
       <meta charset="UTF-8">
-      <title>Login</title>
+      <title><fmt:message key="login.title" /></title>
       <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
    </head>
    <body>
 
-      <jsp:include page="menuUnknownUserView.jsp"></jsp:include>
+      <jsp:include page="menuView.jsp"></jsp:include>
 
-      <h3>Login Page</h3>
+      <h3><fmt:message key="login.title" /></h3>
 
 
       <form method="POST" action="${pageContext.request.contextPath}/login">
          <input type="hidden" name="redirectId" value="${param.redirectId}" />
          <table border="0">
             <tr>
-               <td>Login:</td>
+               <td><fmt:message key="input.login" /></td>
                <td><input type="text" name="login" value= "${user.login}" /> </td>
             </tr>
             <tr>
-               <td>Password:</td>
+               <td><fmt:message key="input.password" /></td>
                <td><input type="password" name="password" value= "${user.password}" /> </td>
             </tr>
 

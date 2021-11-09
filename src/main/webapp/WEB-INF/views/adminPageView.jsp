@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<%@ page session ="true" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="languages/messages"/>
+
+<html lang="${cookie['lang'].value}">
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Page</title>
-    <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title><fmt:message key="admin.title" /></title>
+        <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <jsp:include page="menuView.jsp"></jsp:include>
 
-<body>
-
-<jsp:include page="menuUserView.jsp"></jsp:include>
-
-<h3>Admin Page</h3>
-
-Hello! Here's what you can do:
-
-<p>
-    <a href="${pageContext.request.contextPath}/createAccount">
-        <span>Create Account</span>
-    </a>
-</p>
-<p>
-    <a href="${pageContext.request.contextPath}/scheduleChanges">
-        <span>Schedule Changes</span>
-    </a>
-</p>
+        <h3><fmt:message key="admin.title" /></h3>
+        <fmt:message key="admin.text" />
 
 
-</body>
+        <p>
+            <a href="${pageContext.request.contextPath}/createAccount">
+                <span><fmt:message key="create.account.title" /></span>
+            </a>
+        </p>
+        <p>
+            <a href="${pageContext.request.contextPath}/scheduleChanges">
+                <span><fmt:message key="schedule.changes.title" /></span>
+            </a>
+        </p>
+    </body>
 </html>

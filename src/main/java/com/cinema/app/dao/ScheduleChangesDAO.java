@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import static java.lang.String.format;
 
@@ -25,7 +25,7 @@ public class ScheduleChangesDAO {
             prepareStatement.execute();
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
             return false;
         } finally {
             dbManager.commit(connection);
@@ -47,7 +47,7 @@ public class ScheduleChangesDAO {
             prepareStatement.execute();
 
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
             return false;
         } finally {
             dbManager.commit(connection);
@@ -71,7 +71,7 @@ public class ScheduleChangesDAO {
                 list.add(sessionId);
             }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }
@@ -94,10 +94,11 @@ public class ScheduleChangesDAO {
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            id = resultSet.getLong(Constants.ID);
+            if (resultSet.next()) {
+                id = resultSet.getLong(Constants.ID);
+            }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }

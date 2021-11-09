@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import com.cinema.app.utils.Constants;
 
@@ -46,7 +47,7 @@ public class AccountDAO {
                 list.add(data);
             }
         } catch (SQLException e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         } finally {
             dbManager.commit(connection);
         }

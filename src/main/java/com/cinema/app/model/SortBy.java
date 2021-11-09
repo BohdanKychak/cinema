@@ -34,7 +34,7 @@ public class SortBy {
             return this;
         }
 
-        public SortBy.Builder withFilterAge(String filterAge){
+        public SortBy.Builder withFilterAge(String filterAge) {
             newSortBy.filterAge = filterAge;
             return this;
         }

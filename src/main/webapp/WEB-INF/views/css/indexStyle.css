@@ -1,0 +1,46 @@
+/* задаём глобальные переменные для цветов, в которые будем окрашивать текст */
+:root {
+  --color-1: Goldenrod;
+  --color-2: MediumOrchid;
+  --color-3: OrangeRed;
+  --color-4: DeepPink;
+  --color-5: IndianRed;
+}
+
+/* настройки блока с текстом */
+.colored {
+  /* фон */
+  background: white;
+  /* межстрочное расстояние */
+  line-height: 1;
+  /* подключаем сетку */
+  display: grid;
+
+}
+
+h1 {
+  /* настраиваем внешний вид шрифта */
+  font-family: sans-serif;
+  font-size: 1,5vw;
+  font-weight: 900;
+
+  /* переводим все буквы в заглавные */
+  text-transform: uppercase;
+
+  background: linear-gradient(219deg,
+    var(--color-1) 54%,
+    transparent 54%,transparent 54.5%,
+    var(--color-2) 54.5%, var(--color-2)  65.5%,
+    transparent 65.5%,transparent 66%,
+    var(--color-3) 66%,var(--color-3) 77% ,
+    transparent 77%,transparent 77.5%,
+    var(--color-4) 77.5%, var(--color-4) 88.5%,
+    transparent 88.5%, transparent 89%,
+    var(--color-5) 89%);
+  /* обрезаем фон по контуру букв */
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  /* делаем заголовок прозрачным, чтобы был виден цветной фон */
+  color: transparent;
+}

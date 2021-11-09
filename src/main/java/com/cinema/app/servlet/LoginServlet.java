@@ -2,7 +2,8 @@ package com.cinema.app.servlet;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         try {
             redirectId = Integer.parseInt(request.getParameter(Constants.REDIRECT_ID));
         } catch (Exception e) {
-            log.severe(e.getMessage());
+            log.error(e.getMessage());
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + Constants.URL_INFO));

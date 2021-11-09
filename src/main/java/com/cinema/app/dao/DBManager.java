@@ -1,7 +1,7 @@
 package com.cinema.app.dao;
 
 import java.sql.*;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class DBManager {
     private static final Logger log = Logger.getLogger(DBManager.class.getName());
@@ -33,16 +33,8 @@ public class DBManager {
             connection.commit();
             connectionPool.putBack(connection);
         } catch (SQLException exception) {
-            log.severe(exception.getMessage());
+            log.error(exception.getMessage());
         }
     }
 
-    public void rollback(Connection connection) {
-        try {
-            connection.rollback();
-            connectionPool.putBack(connection);
-        } catch (SQLException exception) {
-            log.severe(exception.getMessage());
-        }
-    }
 }

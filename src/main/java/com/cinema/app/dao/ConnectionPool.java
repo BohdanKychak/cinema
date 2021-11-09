@@ -5,7 +5,7 @@ import com.cinema.app.utils.Constants;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.LinkedList;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 
 public class ConnectionPool {
@@ -31,9 +31,10 @@ public class ConnectionPool {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, user, password);
+            connection.setAutoCommit(false);
         } catch (Exception e) {
-            log.severe(Constants.ERROR_CONNECTION);
-            log.severe(e.getMessage());
+            log.error(Constants.ERROR_CONNECTION);
+            log.error(e.getMessage());
         }
         return connection;
     }

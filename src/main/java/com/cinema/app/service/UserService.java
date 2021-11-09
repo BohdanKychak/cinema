@@ -25,7 +25,7 @@ public class UserService {
 
         for (int i = 0; i < userLogin.size(); i++) {
             // This user has a role as USER.
-            Account userAccount = new Account(userLogin.get(i), userPassword.get(i), //
+            Account userAccount = new Account(userLogin.get(i), userPassword.get(i), Constants.USER, //
                     Constants.ROLE_USER);
             mapUsers.put(userAccount.getLogin(), userAccount);
         }
@@ -34,7 +34,7 @@ public class UserService {
         List<String> adminPassword = AccountDAO.getPassword(Constants.ADMIN);
         for (int i = 0; i < adminLogin.size(); i++) {
             // This user has 2 roles USER and ADMIN.
-            Account adminAccount = new Account(adminLogin.get(i), adminPassword.get(i), //
+            Account adminAccount = new Account(adminLogin.get(i), adminPassword.get(i), Constants.ADMIN, //
                     Constants.ROLE_USER, Constants.ROLE_ADMIN);
             mapUsers.put(adminAccount.getLogin(), adminAccount);
         }

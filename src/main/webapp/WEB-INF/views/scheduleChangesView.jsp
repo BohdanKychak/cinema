@@ -1,65 +1,77 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
+<%@ page session ="true" %>
+
+<fmt:setLocale value="${cookie['lang'].value}"/>
+<fmt:setBundle basename="languages/messages"/>
+
+<html lang="${cookie['lang'].value}">
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Schedule Changes</title>
-    <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title><fmt:message key="schedule.changes.title" /></title>
+        <link rel="icon" href="${pageContext.request.contextPath}/img/icon.ico" type="image/x-icon">
+    </head>
+    <body>
+        <jsp:include page="menuView.jsp"></jsp:include>
 
-<jsp:include page="menuAvailableToAllView.jsp"></jsp:include>
-
-<h3>Schedule Changes<br/>
-    <em><small>You can delete or add a session to your cinema schedule in one attempt.</small></em></h3>
+        <h3><fmt:message key="schedule.changes.title" /><br/>
+            <em><small><fmt:message key="schedule.changes.text" /></small></em></h3>
 
 
-<form method="POST" action="${pageContext.request.contextPath}/scheduleChanges">
-    <input type="hidden" name="redirectId" value="${param.redirectId}"/>
-    <table border="0">
+        <form method="POST" action="${pageContext.request.contextPath}/scheduleChanges">
+            <input type="hidden" name="redirectId" value="${param.redirectId}"/>
+            <table border="0">
 
-        <tr>
-            <td><p style="color:#c800ff">Add a new movie to the schedule</p>
-                You can add a movie to the schedule no later than the day before it is shown.
-            </td>
-        </tr>
-        <tr>
-            <form>
-                <td>
-                    Movie: <select name="movieTitle">
-                    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                    <c:if test="${not empty list}">
-                        <c:forEach items="${list}" var="record">
-                            <option>
-                                    ${record.movieTitle}
-                            </option>
-                        </c:forEach>
-                    </c:if>
-                </select>
-                    Date and time: <input type="datetime-local" name="sessionTime">
-                </td>
-            </form>
-        </tr>
-        <tr>
-            <td><p style="color:#c800ff">Cancel movie</p>
-                Enter the session number for delete
-            </td>
-        </tr>
-        <tr>
-            <td>
-                ID: <input type="number" name="id" min="1">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <p><br/></p>
-                <input type="submit" value="Submit"/>
-                <INPUT TYPE="button" VALUE="Cancel" onClick="history.go(-1);">
-            </td>
-        </tr>
-    </table>
-</form>
-<i><p style="color: red;">${message}</p></i>
+                <tr>
+                    <td>
+                        <p style="color:#c800ff">
+                            <fmt:message key="schedule.changes.add" />
+                        </p>
+                        <fmt:message key="schedule.changes.add.text" />
+                    </td>
+                </tr>
+                <tr>
+                    <form>
+                        <td>
+                            <fmt:message key="input.movie" />
+                            <select name="movieTitle">
+                                <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+                                <c:if test="${not empty list}">
+                                    <c:forEach items="${list}" var="record">
+                                        <option>
+                                            ${record.movieTitle}
+                                        </option>
+                                    </c:forEach>
+                                </c:if>
+                            </select>
+                            <fmt:message key="input.time" /><input type="datetime-local" name="sessionTime">
+                        </td>
+                    </form>
+                </tr>
+                <tr>
+                    <td><p style="color:#c800ff"><fmt:message key="schedule.changes.delete" /></p>
+                        <fmt:message key="schedule.changes.delete.text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ID: <input type="number" name="id" min="1">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p><br/></p>
+                        <input type="submit" value="Submit"/>
+                        <INPUT TYPE="button" VALUE="Cancel" onClick="history.go(-1);">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <i><p style="color: red;">${message}</p></i>
 
-</body>
+    </body>
 </html>

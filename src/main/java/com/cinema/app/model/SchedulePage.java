@@ -12,7 +12,7 @@ public class SchedulePage {
         return page;
     }
 
-    public SortBy getSortBy(){
+    public SortBy getSortBy() {
         return sortBy;
     }
 
@@ -32,7 +32,7 @@ public class SchedulePage {
             return this;
         }
 
-        public SchedulePage.Builder withSortBy(SortBy sortBy){
+        public SchedulePage.Builder withSortBy(SortBy sortBy) {
             newSchedulePage.sortBy = sortBy;
             return this;
         }

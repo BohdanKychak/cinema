@@ -44,8 +44,8 @@ public class Page {
             return this;
         }
 
-        public Page.Builder withNumberOfPages(int total, int pageSize){
-            newPage.numberOfPages = (total + pageSize - 1)/pageSize;
+        public Page.Builder withNumberOfPages(int total, int pageSize) {
+            newPage.numberOfPages = (total + pageSize - 1) / pageSize;
             return this;
         }
 
