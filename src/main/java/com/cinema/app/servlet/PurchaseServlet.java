@@ -36,34 +36,37 @@ public class PurchaseServlet extends HttpServlet {
         String place = request.getParameter(Constants.PLACE);
         String login = AppUtils.getLoginUser(request.getSession()).getLogin();
 
-        String message = null;
+        String message = workWithData(id, place, login);
 
-        if (id.matches(Constants.NUMERIC_TERMS)) {
-            message = workWithData(id, place, login);
+        request.getSession().setAttribute(Constants.MESSAGE, message);
+        if (message.matches(Constants.NUMERIC_TERMS)) {
+            response.sendRedirect(Constants.PURCHASED);
+        } else {
+            doGet(request, response);
         }
 
-        if (message == null) {
-            message = Constants.ERROR_EMPTY;
-        }
-
-        request.setAttribute(Constants.MESSAGE, message);
-        doGet(request, response);
     }
 
     private String workWithData(String id, String place, String login) {
-        long sessionId = Long.parseLong(id);
-        if (PlaceService.existsId(sessionId)) {
-            if (place.matches(Constants.NUMERIC_TERMS)) {
-                int placeNumber = Integer.parseInt(place);
-                if (placeNumber < Constants.MIN_SEATS_HALL || placeNumber > Constants.MAX_SEATS_HALL) {
-                    return null;
+
+        if (id.matches(Constants.NUMERIC_TERMS)) {
+            long sessionId = Long.parseLong(id);
+
+            if (PlaceService.existsId(sessionId)) {
+
+                if (place.matches(Constants.NUMERIC_TERMS)) {
+
+                    int placeNumber = Integer.parseInt(place);
+                    if (placeNumber >= Constants.MIN_SEATS_HALL && placeNumber <= Constants.MAX_SEATS_HALL) {
+                         return PurchaseDAO.getPurchaseCode(sessionId, placeNumber, login);
+                    }
+
+                } else {
+                    return PlaceService.getInfoPlaces(id);
                 }
-                return PurchaseDAO.getPurchaseCode(sessionId, place, login);
-            } else {
-                return PlaceService.getMessageAboutPlace(id);
             }
         }
-        return null;
+        return Constants.ERROR_EMPTY;
     }
 
 }

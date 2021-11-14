@@ -40,21 +40,21 @@ public class ConnectionPool {
     }
 
     public Connection retrieve() {
-        Connection newConn;
+        Connection newConnection;
         if (available.size() == 0) {
-            newConn = getConnection();
+            newConnection = getConnection();
         } else {
-            newConn = available.getLast();
-            available.remove(newConn);
+            newConnection = available.getLast();
+            available.remove(newConnection);
         }
-        used.add(newConn);
-        return newConn;
+        used.add(newConnection);
+        return newConnection;
     }
 
-    public void putBack(Connection c) {
-        if (c != null) {
-            if (used.remove(c)) {
-                available.add(c);
+    public void putBack(Connection connection) {
+        if (connection != null) {
+            if (used.remove(connection)) {
+                available.add(connection);
             } else {
                 throw new IllegalStateException(Constants.ERROR_PUT_BACK);
             }

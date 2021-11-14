@@ -21,12 +21,13 @@ public class CookieLocaleFilter implements Filter {
             Cookie cookie = new Cookie(Constants.LANG, req.getParameter(Constants.COOKIE_LOCALE));
             res.addCookie(cookie);
         }
-
         chain.doFilter(request, response);
     }
 
-    public void destroy() {}
+    public void destroy() {
+    }
 
-    public void init(FilterConfig arg0) throws ServletException {}
+    public void init(FilterConfig arg0) {
+    }
 
 }

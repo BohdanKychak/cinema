@@ -37,12 +37,7 @@ public class RegistrationServlet extends HttpServlet {
         String password = request.getParameter(Constants.PASSWORD);
         String bankAccount = request.getParameter(Constants.BANK_ACCOUNT);
 
-        boolean correct = conditionsMet(login, password, bankAccount);
-        if (correct) {
-            UserService userService = new UserService();
-            correct = userService.createUser(login, password, bankAccount, Constants.USER);
-        }
-
+        boolean correct = isDone(login, password, bankAccount, Constants.USER);
 
         if (correct) {
             response.sendRedirect(Constants.JSP_CONGRATULATIONS);
@@ -52,7 +47,16 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-    public static boolean conditionsMet(String login, String password, String bankAccount) {
+    public static boolean isDone(String login, String password, String bankAccount, String role) {
+        boolean correct = conditionsMet(login, password, bankAccount);
+        if (correct) {
+            UserService userService = new UserService();
+            correct = userService.createUser(login, password, bankAccount, role);
+        }
+        return correct;
+    }
+
+    private static boolean conditionsMet(String login, String password, String bankAccount) {
         return !login.trim().isEmpty() && password.matches(Constants.PASSWORD_TERMS) && bankAccount.matches(Constants.BANK_ACCOUNT_TERMS);
     }
 

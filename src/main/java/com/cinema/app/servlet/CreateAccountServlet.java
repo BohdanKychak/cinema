@@ -31,22 +31,19 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-
         String login = request.getParameter(Constants.LOGIN);
         String password = request.getParameter(Constants.PASSWORD);
         String bankAccount = request.getParameter(Constants.BANK_ACCOUNT);
         String role = request.getParameter(Constants.ROLE);
 
-        boolean correct = RegistrationServlet.conditionsMet(login, password, bankAccount);
-        if (correct) {
-            UserService userService = new UserService();
-            correct = userService.createUser(login, password, bankAccount, role);
-        }
+        boolean correct = RegistrationServlet.isDone(login, password, bankAccount, role);
 
-        if (!correct) {
+        if (correct) {
+            response.sendRedirect(Constants.JSP_DONE);
+        } else {
             request.setAttribute(Constants.MESSAGE, Constants.ERROR_REGISTRATION);
+            doGet(request, response);
         }
-        doGet(request, response);
     }
 
 }

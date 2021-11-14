@@ -23,9 +23,6 @@ import com.cinema.app.utils.SecurityUtils;
 @WebFilter(Constants.URL_ANY)
 public class SecurityFilter implements Filter {
 
-    public SecurityFilter() {
-    }
-
     @Override
     public void destroy() {
     }
@@ -94,7 +91,6 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void init(FilterConfig fConfig) {
-
     }
 
 }

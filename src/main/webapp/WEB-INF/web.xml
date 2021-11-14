@@ -26,5 +26,19 @@
         <servlet-name>default</servlet-name>
         <url-pattern>*.png</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/appExceptionHandler</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/appExceptionHandler</location>
+    </error-page>
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
 
 </web-app>

@@ -14,14 +14,14 @@ public class ScheduleChangesDAO {
     private static final Logger log = Logger.getLogger(ScheduleChangesDAO.class.getName());
     private static final DBManager dbManager = DBManager.getInstance();
 
-    public static boolean getAddToSchedule(long movieId, String sessionTime) {
+    public static boolean getAddToSchedule(long movieId, Timestamp time) {
 
         Connection connection = dbManager.getConnection();
 
         try {
             PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_ADD_TO_SCHEDULE);
             prepareStatement.setLong(1, movieId);
-            prepareStatement.setTimestamp(2, Timestamp.valueOf(sessionTime));
+            prepareStatement.setTimestamp(2, time);
             prepareStatement.execute();
 
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class ScheduleChangesDAO {
         ResultSet resultSet;
         try {
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(Constants.SQL_SESSION_ID);
+            resultSet = statement.executeQuery(format(Constants.SQL_SESSION_ID, ScheduleDAO.getToday()));
 
             list = new ArrayList<>();
             while (resultSet.next()) {

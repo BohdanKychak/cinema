@@ -1,10 +1,8 @@
 package com.cinema.app.servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cinema.app.dao.ScheduleChangesDAO;
 import com.cinema.app.dao.ScheduleDAO;
 import com.cinema.app.utils.Constants;
+
 
 @WebServlet(Constants.URL_SCHEDULE_CHANGES)
 public class ScheduleChangesServlet extends HttpServlet {
@@ -50,33 +49,44 @@ public class ScheduleChangesServlet extends HttpServlet {
             correct = ScheduleChangesDAO.getCancelSession(sessionId);
         } else if (!movieTitle.trim().isEmpty() && !sessionTime.trim().isEmpty()) {
             errorCode = 2;
-            sessionTime = getSessionTime(sessionTime);
-            if (sessionTime != null) {
-                String today = new SimpleDateFormat(Constants.TIMESTAMP_TERMS).format(new Date());
-                if (sessionTime.compareTo(today) > 0) {
-                    long movieId = ScheduleChangesDAO.getMovieId(movieTitle);
-                    correct = ScheduleChangesDAO.getAddToSchedule(movieId, sessionTime);
-                }
+            Timestamp time = getTimestamp(sessionTime);
+            if (time != null) {
+                long movieId = ScheduleChangesDAO.getMovieId(movieTitle);
+                correct = ScheduleChangesDAO.getAddToSchedule(movieId, time);
             }
         }
         String message = getErrorMassage(errorCode);
 
-        if (!correct) {
+        if (correct) {
+            response.sendRedirect(Constants.JSP_DONE);
+        } else {
             request.setAttribute(Constants.MESSAGE, message);
+            doGet(request, response);
         }
-        doGet(request, response);
-
     }
 
-    private String getSessionTime(String sessionTime) {
-        try {
-            LocalDateTime localDateTime = LocalDateTime.parse(sessionTime);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.TIMESTAMP_TERMS);
-            return localDateTime.format(formatter); // "1986-04-08 12:30"
-        } catch (Exception e) {
-            return null;
-        }
+//    String getSessionTime(String sessionTime) {
+//        try {
+//            LocalDateTime localDateTime = LocalDateTime.parse(sessionTime);
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.TIMESTAMP_TERMS);
+//            return localDateTime.format(formatter); // "1986-04-08 12:30"
+//        } catch (Exception e) {
+//            return null;
+//        }
+//
+//    }
 
+    private static Timestamp getTimestamp(String sessionTime) {
+        LocalDateTime localDateTime = LocalDateTime.parse(sessionTime);
+
+        if (isTimeCorrectly(localDateTime)) {
+            return Timestamp.valueOf(localDateTime);
+        }
+        return null;
+    }
+
+    private static boolean isTimeCorrectly(LocalDateTime localDateTime) {
+        return LocalDateTime.now().isBefore(localDateTime) && localDateTime.getHour() > Constants.HOUR_START && localDateTime.getHour() < Constants.HOUR_FINISH;
     }
 
     private String getErrorMassage(int errorCode) {

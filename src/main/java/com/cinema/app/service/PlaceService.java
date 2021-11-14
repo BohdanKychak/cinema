@@ -20,7 +20,7 @@ public class PlaceService {
         return false;
     }
 
-    public static String getMessageAboutPlace(String sessionId) {
+    public static String getInfoPlaces(String sessionId) {
         List<String> occupiedSeatsList = getListPlace(sessionId);
 
         if (occupiedSeatsList.isEmpty()) {

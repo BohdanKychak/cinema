@@ -19,25 +19,25 @@ public class SecurityConfig {
     private static void init() {
 
         // Configuration for the role "USER".
-        List<String> urlPatterns1 = new ArrayList<>();
+        List<String> urlPatternsUser = new ArrayList<>();
 
-        urlPatterns1.add(Constants.URL_INFO);
-        urlPatterns1.add(Constants.URL_USER);
-        urlPatterns1.add(Constants.URL_PURCHASE);
+        urlPatternsUser.add(Constants.URL_INFO);
+        urlPatternsUser.add(Constants.URL_USER);
+        urlPatternsUser.add(Constants.URL_PURCHASE);
 
-        mapConfig.put(Constants.ROLE_USER, urlPatterns1);
+        mapConfig.put(Constants.ROLE_USER, urlPatternsUser);
 
         // Configuration for the role "ADMIN".
-        List<String> urlPatterns2 = new ArrayList<>();
+        List<String> urlPatternsAdmin = new ArrayList<>();
 
-        urlPatterns2.add(Constants.URL_INFO);
-        urlPatterns2.add(Constants.URL_USER);
-        urlPatterns2.add(Constants.URL_ADMIN);
-        urlPatterns2.add(Constants.URL_PURCHASE);
-        urlPatterns2.add(Constants.URL_CREATE_ACCOUNT);
-        urlPatterns2.add(Constants.URL_SCHEDULE_CHANGES);
+        urlPatternsAdmin.add(Constants.URL_INFO);
+        urlPatternsAdmin.add(Constants.URL_USER);
+        urlPatternsAdmin.add(Constants.URL_ADMIN);
+        urlPatternsAdmin.add(Constants.URL_PURCHASE);
+        urlPatternsAdmin.add(Constants.URL_CREATE_ACCOUNT);
+        urlPatternsAdmin.add(Constants.URL_SCHEDULE_CHANGES);
 
-        mapConfig.put(Constants.ROLE_ADMIN, urlPatterns2);
+        mapConfig.put(Constants.ROLE_ADMIN,urlPatternsAdmin);
     }
 
     public static Set<String> getAllAppRoles() {

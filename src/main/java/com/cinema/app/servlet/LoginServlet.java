@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
         try {
             redirectId = Integer.parseInt(request.getParameter(Constants.REDIRECT_ID));
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.info(e.getMessage()+ " redirectId is null");
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + Constants.URL_INFO));

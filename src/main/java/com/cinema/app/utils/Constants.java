@@ -10,6 +10,8 @@ public final class Constants {
     public static final long CINEMA_ID = 12;
     public static final long MAX_GENERATION_CODE = 999_999_999;
     public static final long MIN_GENERATION_CODE = 100_000_000;
+    public static final int HOUR_START = 9;
+    public static final int HOUR_FINISH = 22;
 
     public static final String USER = "user";
     public static final String ADMIN = "admin";
@@ -44,6 +46,12 @@ public final class Constants {
     public static final String LANG = "lang";
     public static final String COOKIE_LOCALE = "cookieLocale";
     public static final String COOKIE_LOCALE_FILTER = "CookieLocaleFilter";
+    public static final String STATUS_CODE = "statusCode";
+    public static final String REQUEST_URI = "requestUri";
+    public static final String SERVLET_NAME = "servletName";
+    public static final String THROWABLE_NAME = "throwableName";
+    public static final String THROWABLE_MESSAGE = "throwableMessage";
+    public static final String PURCHASED = "purchased";
 
     public static final String SQL_LOGIN = "SELECT login FROM account WHERE role='%s';";
     public static final String SQL_PASSWORD = "SELECT password FROM account WHERE role='%s';";
@@ -60,7 +68,7 @@ public final class Constants {
     public static final String SQL_MOVIE_ID = "SELECT id FROM movie WHERE movieTitle= '%s';";
     public static final String SQL_MAX_USER_ID = "SELECT max(id) as maxId FROM account;";
     public static final String SQL_PLACE = "SELECT place FROM sessionSeats WHERE sessionId='%s';";
-    public static final String SQL_SEAT_RESERVATION = "INSERT INTO sessionSeats(sessionId, place, hallId, purchaseCode) VALUES (?, ?, " + HALL + ", ?);";
+    public static final String SQL_SEAT_RESERVATION = "INSERT INTO sessionSeats(userId, sessionId, place, hallId, purchaseCode) VALUES (?, ?, ?, " + HALL + ", ?);";
     public static final String SQL_USER_ID = "SELECT id FROM account WHERE login='%s';";
     public static final String SQL_GET_BALANCE = "SELECT money FROM bankAccount WHERE userId=%s;";
     public static final String SQL_MONEY_TRANSACTIONS = "UPDATE bankAccount SET money=? WHERE userId=?;";
@@ -71,17 +79,17 @@ public final class Constants {
     public static final String SQL_FILTER_BY_AGE = "WHERE age='%s+'";
     public static final String SQL_ADDITIONAL_FILTER = "AND m.age='%s+'";
 
+    public static final String UTF8 = "UTF-8";
     public static final String PASSWORD_TERMS = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
     public static final String BANK_ACCOUNT_TERMS = "\\d{8,}";
     public static final String NUMERIC_TERMS = "\\d{1,}";
     public static final String DATA_TIME_TERMS = "yyyy-MM-dd HH:mm";
-    public static final String TIMESTAMP_TERMS = "yyyy-MM-dd hh:mm:ss";
 
+    public static final String UNKNOWN = "Unknown";
     public static final String MESSAGE = "message";
     public static final String MESSAGE_SEATS_FREE = "All seats are free";
     public static final String MESSAGE_FREE_PLACE = "Free places: ";
     public static final String MESSAGE_SEATS_TAKEN = "All seats are taken";
-    public static final String MESSAGE_CHECK_NUMBER = "Your check number: ";
     public static final String ERROR_REGISTRATION = "Error. Such a user exists or the specified data does not meet the conditions of registration";
     public static final String ERROR_INVALID_FIELDS = "Invalid login or Password";
     public static final String ERROR_ID = "Error. The specified session ID does not exist";
@@ -90,6 +98,11 @@ public final class Constants {
     public static final String ERROR_PARAMETER_INVALID = "Parameter %s is invalid";
     public static final String ERROR_CONNECTION = "Cannot obtain a connection from pool";
     public static final String ERROR_PUT_BACK = "Connection not in the used array";
+
+    public static final String ERROR_EXCEPTION = "javax.servlet.error.exception";
+    public static final String ERROR_STATUS_CODE = "javax.servlet.error.status_code";
+    public static final String ERROR_SERVLET_NAME = "javax.servlet.error.servlet_name";
+    public static final String ERROR_REQUEST_URI = "javax.servlet.error.request_uri";
 
     public static final String LIST = "list";
     public static final String LOGIN_USER = "loginUser";
@@ -108,8 +121,10 @@ public final class Constants {
     public static final String URL_SCHEDULE = "/schedule";
     public static final String URL_REGISTRATION = "/registration";
     public static final String URL_PURCHASE = "/purchase";
+    public static final String URL_PURCHASED = "/purchased";
     public static final String URL_CREATE_ACCOUNT = "/createAccount";
     public static final String URL_SCHEDULE_CHANGES = "/scheduleChanges";
+    public static final String URL_APP_EXCEPTION_HANDLER = "/appExceptionHandler";
 
     public static final String JSP_INDEX = "/index.jsp";
     public static final String JSP_ACCESS_DENIED = "/accessDenied.jsp";
@@ -120,7 +135,10 @@ public final class Constants {
     public static final String JSP_SCHEDULE = "/WEB-INF/views/scheduleView.jsp";
     public static final String JSP_REGISTRATION = "/WEB-INF/views/registrationView.jsp";
     public static final String JSP_PURCHASE = "/WEB-INF/views/purchaseView.jsp";
+    public static final String JSP_PURCHASED = "/WEB-INF/views/purchasedView.jsp";
     public static final String JSP_CONGRATULATIONS = "/cinema/congratulations.jsp";
+    public static final String JSP_DONE = "/cinema/done.jsp";
     public static final String JSP_CREATE_ACCOUNT = "/WEB-INF/views/createAccountView.jsp";
     public static final String JSP_SCHEDULE_CHANGES = "/WEB-INF/views/scheduleChangesView.jsp";
+    public static final String JSP_APP_EXCEPTION_HANDLER = "/WEB-INF/views/appExceptionHandler.jsp";
 }

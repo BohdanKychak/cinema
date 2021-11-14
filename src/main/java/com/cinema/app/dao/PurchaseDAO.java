@@ -12,20 +12,20 @@ public class PurchaseDAO {
     private static final Logger log = Logger.getLogger(PurchaseDAO.class.getName());
     private static final DBManager dbManager = DBManager.getInstance();
 
-    public static String getPurchaseCode(long id, String place, String login) {
+    public static String getPurchaseCode(long id, int place, String login) {
         String purchaseCode = generationCode();
 
         long userId = getId(format(Constants.SQL_USER_ID, login));
 
         if (ticketPurchase(id, place, purchaseCode, userId)) {
-            return Constants.MESSAGE_CHECK_NUMBER + purchaseCode;
+            return purchaseCode;
         }
         return null;
     }
 
-    private static boolean ticketPurchase(long id, String place, String purchaseCode, long userId) {
+    private static boolean ticketPurchase(long id, int place, String purchaseCode, long userId) {
         if (checkAccount(userId)) {
-            if (!seatReservation(id, place, purchaseCode)) {
+            if (!seatReservation(userId, id, place, purchaseCode)) {
                 return false;
             }
         }
@@ -79,14 +79,15 @@ public class PurchaseDAO {
         prepareStatement.execute();
     }
 
-    private static boolean seatReservation(long id, String place, String purchaseCode) {
+    private static boolean seatReservation(long userId, long id, int place, String purchaseCode) {
         Connection connection = dbManager.getConnection();
 
         try {
             PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_SEAT_RESERVATION);
-            prepareStatement.setLong(1, id);
-            prepareStatement.setString(2, place);
-            prepareStatement.setString(3, purchaseCode);
+            prepareStatement.setLong(1, userId);
+            prepareStatement.setLong(2, id);
+            prepareStatement.setInt(3, place);
+            prepareStatement.setString(4, purchaseCode);
             prepareStatement.execute();
             int freePlaces = getFreePlaces(id);
             prepareStatement = connection.prepareStatement(Constants.SQL_NEW_NUMBER_OF_SEATS);
