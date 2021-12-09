@@ -1,7 +1,9 @@
 package com.cinema.app.dao;
 
-import java.sql.*;
 import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class DBManager {
     private static final Logger log = Logger.getLogger(DBManager.class.getName());

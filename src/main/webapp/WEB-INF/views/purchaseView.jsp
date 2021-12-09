@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ page session ="true" %>
 
@@ -8,7 +9,6 @@
 <fmt:setBundle basename="languages/messages"/>
 
 <html lang="${cookie['lang'].value}">
-<html>
     <head>
         <meta charset="UTF-8">
         <title><fmt:message key="purchase.title" /></title>
@@ -47,8 +47,22 @@
                     </td>
                 </tr>
             </table>
+            <c:if test="${message eq 'empty'}">
+                <i><p style="color: red;"><fmt:message key="error.empty" /></p></i>
+            </c:if>
+            <c:if test="${message eq 'account'}">
+                <i><p style="color: red;"><fmt:message key="error.account" /></p></i>
+            </c:if>
+            <c:if test="${message eq 'free'}">
+                <i><p style="color: red;"><fmt:message key="message.all.free" /></p></i>
+            </c:if>
+            <c:if test="${message2 eq 'message'}">
+                <i><p style="color: red;"><fmt:message key="message.places" />${message}</p></i>
+            </c:if>
+            <c:if test="${message eq 'taken'}">
+                <i><p style="color: red;"><fmt:message key="message.all.taken" /></p></i>
+            </c:if>
         </form>
-        <i><p style="color: red;">${message}</p></i>
         <p>
             <br/>
             <img src="${pageContext.request.contextPath}/img/hall.png" width="800" height="450" alt="Hall">

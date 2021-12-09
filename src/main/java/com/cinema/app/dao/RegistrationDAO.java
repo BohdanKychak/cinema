@@ -1,10 +1,9 @@
 package com.cinema.app.dao;
 
 import com.cinema.app.utils.Constants;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
-
-import org.apache.log4j.Logger;
 
 
 public class RegistrationDAO {
@@ -19,7 +18,7 @@ public class RegistrationDAO {
         try {
             PreparedStatement prepareStatement = connection.prepareStatement(Constants.SQL_REGISTRATION);
             prepareStatement.setString(1, login);
-            prepareStatement.setString(2, password);
+            prepareStatement.setString(2, Constants.EMPTY + password.hashCode());
             prepareStatement.setString(3, role);
             prepareStatement.execute();
             stagesOfRegistration++;
@@ -29,7 +28,6 @@ public class RegistrationDAO {
             prepareStatement.setLong(3, getUserId(connection));
             prepareStatement.execute();
             stagesOfRegistration++;
-
 
         } catch (SQLException e) {
             log.error(e.getMessage());

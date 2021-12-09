@@ -1,12 +1,8 @@
 package com.cinema.app.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.cinema.app.utils.Constants;
+
+import java.util.*;
 
 public class SecurityConfig {
 
@@ -24,6 +20,7 @@ public class SecurityConfig {
         urlPatternsUser.add(Constants.URL_INFO);
         urlPatternsUser.add(Constants.URL_USER);
         urlPatternsUser.add(Constants.URL_PURCHASE);
+        urlPatternsUser.add(Constants.URL_PURCHASED);
 
         mapConfig.put(Constants.ROLE_USER, urlPatternsUser);
 
@@ -34,10 +31,11 @@ public class SecurityConfig {
         urlPatternsAdmin.add(Constants.URL_USER);
         urlPatternsAdmin.add(Constants.URL_ADMIN);
         urlPatternsAdmin.add(Constants.URL_PURCHASE);
+        urlPatternsAdmin.add(Constants.URL_PURCHASED);
         urlPatternsAdmin.add(Constants.URL_CREATE_ACCOUNT);
         urlPatternsAdmin.add(Constants.URL_SCHEDULE_CHANGES);
 
-        mapConfig.put(Constants.ROLE_ADMIN,urlPatternsAdmin);
+        mapConfig.put(Constants.ROLE_ADMIN, urlPatternsAdmin);
     }
 
     public static Set<String> getAllAppRoles() {

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(Constants.URL_PURCHASE)
 public class PurchaseServlet extends HttpServlet {
@@ -41,6 +42,9 @@ public class PurchaseServlet extends HttpServlet {
         request.getSession().setAttribute(Constants.MESSAGE, message);
         if (message.matches(Constants.NUMERIC_TERMS)) {
             response.sendRedirect(Constants.PURCHASED);
+        } else if (message.matches(Constants.LIST_TERMS)) {
+            request.setAttribute(Constants.MESSAGE2, Constants.MESSAGE);
+            doGet(request, response);
         } else {
             doGet(request, response);
         }
@@ -58,7 +62,8 @@ public class PurchaseServlet extends HttpServlet {
 
                     int placeNumber = Integer.parseInt(place);
                     if (placeNumber >= Constants.MIN_SEATS_HALL && placeNumber <= Constants.MAX_SEATS_HALL) {
-                         return PurchaseDAO.getPurchaseCode(sessionId, placeNumber, login);
+                        String purchase = PurchaseDAO.getPurchaseCode(sessionId, placeNumber, login);
+                        return Objects.requireNonNullElse(purchase, Constants.MESSAGE_ACCOUNT);
                     }
 
                 } else {
@@ -66,7 +71,7 @@ public class PurchaseServlet extends HttpServlet {
                 }
             }
         }
-        return Constants.ERROR_EMPTY;
+        return Constants.MESSAGE_EMPTY;
     }
 
 }

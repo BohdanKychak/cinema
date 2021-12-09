@@ -50,7 +50,7 @@ public class ScheduleServlet extends HttpServlet {
         return parameter;
     }
 
-    private int getPageSize(HttpServletRequest request) {
+    int getPageSize(HttpServletRequest request) {
         int pageSize = getIntParameter(request, Constants.PAGE_SIZE);
         return pageSize == 0 ? DEFAULT_PAGE_SIZE : pageSize;
     }

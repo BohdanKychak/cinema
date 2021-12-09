@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ page session ="true" %>
 
@@ -8,7 +9,6 @@
 <fmt:setBundle basename="languages/messages"/>
 
 <html lang="${cookie['lang'].value}">
-<html>
     <head>
         <meta charset="UTF-8">
         <title><fmt:message key="create.account.title" /></title>
@@ -49,7 +49,10 @@
                     </td>
                 </tr>
             </table>
+            <c:if test="${message eq 'registration'}">
+                <i><p style="color: red;"><fmt:message key="error.registration" /></p></i>
+            </c:if>
         </form>
-        <i><p style="color: red;">${message}</p></i>
+
     </body>
 </html>

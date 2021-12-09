@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 <%@ page session ="true" %>
 
@@ -9,7 +9,6 @@
 <fmt:setBundle basename="languages/messages"/>
 
 <html lang="${cookie['lang'].value}">
-<html>
     <head>
         <meta charset="UTF-8">
         <title><fmt:message key="schedule.changes.title" /></title>
@@ -39,7 +38,6 @@
                         <td>
                             <fmt:message key="input.movie" />
                             <select name="movieTitle">
-                                <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                 <c:if test="${not empty list}">
                                     <c:forEach items="${list}" var="record">
                                         <option>
@@ -50,6 +48,7 @@
                             </select>
                             <fmt:message key="input.time" /><input type="datetime-local" name="sessionTime">
                         </td>
+
                     </form>
                 </tr>
                 <tr>
@@ -62,6 +61,7 @@
                         ID: <input type="number" name="id" min="1">
                     </td>
                 </tr>
+
                 <tr>
                     <td colspan="2">
                         <p><br/></p>
@@ -70,8 +70,16 @@
                     </td>
                 </tr>
             </table>
+            <c:if test="${message eq 'movie'}">
+                <i><p style="color: red;"><fmt:message key="error.movie" /></p></i>
+            </c:if>
+            <c:if test="${message eq 'id'}">
+                <i><p style="color: red;"><fmt:message key="error.id" /></p></i>
+            </c:if>
+            <c:if test="${message eq 'empty'}">
+                <i><p style="color: red;"><fmt:message key="error.empty" /></p></i>
+            </c:if>
         </form>
-        <i><p style="color: red;">${message}</p></i>
 
     </body>
 </html>

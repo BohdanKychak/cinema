@@ -1,0 +1,14 @@
+.copy_link_mess{
+    line-height:40px;
+    border-radius:5px;
+    background:#1DA1F2;
+    color:#fff;
+    position:fixed;
+    padding:0 15px;
+    z-index:99;
+    bottom:30px;
+    left:50%;
+    margin-left:-120px;
+    display:none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 15px;
+}

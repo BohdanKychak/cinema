@@ -27,7 +27,7 @@ public class PlaceService {
             return Constants.MESSAGE_SEATS_FREE;
         }
 
-        StringBuilder freeSeats = new StringBuilder(Constants.MESSAGE_FREE_PLACE);
+        StringBuilder freeSeats = new StringBuilder(Constants.EMPTY);
         int occupiedSeats = 0;
 
         for (int place = Constants.MIN_SEATS_HALL; place <= Constants.MAX_SEATS_HALL; place++) {
@@ -49,6 +49,16 @@ public class PlaceService {
         }
 
         return Constants.MESSAGE_SEATS_TAKEN;
+    }
+
+    public static boolean isFreePlace(long sessionId, int place){
+        List<String> list = getListPlace(Constants.EMPTY + sessionId);
+        for (String s:list) {
+            if(s.equals(((Integer)place).toString())){
+                return false;
+            }
+        }
+        return true;
     }
 
     private static List<String> getListPlace(String sessionId) {

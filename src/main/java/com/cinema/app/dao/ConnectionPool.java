@@ -1,11 +1,11 @@
 package com.cinema.app.dao;
 
 import com.cinema.app.utils.Constants;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.LinkedList;
-import org.apache.log4j.Logger;
 
 
 public class ConnectionPool {

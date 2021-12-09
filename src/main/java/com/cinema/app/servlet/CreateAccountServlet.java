@@ -1,6 +1,6 @@
 package com.cinema.app.servlet;
 
-import java.io.IOException;
+import com.cinema.app.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.cinema.app.service.UserService;
-import com.cinema.app.utils.Constants;
+import java.io.IOException;
 
 @WebServlet(Constants.URL_CREATE_ACCOUNT)
 public class CreateAccountServlet extends HttpServlet {
@@ -41,7 +39,7 @@ public class CreateAccountServlet extends HttpServlet {
         if (correct) {
             response.sendRedirect(Constants.JSP_DONE);
         } else {
-            request.setAttribute(Constants.MESSAGE, Constants.ERROR_REGISTRATION);
+            request.setAttribute(Constants.MESSAGE, Constants.MESSAGE_REGISTRATION);
             doGet(request, response);
         }
     }

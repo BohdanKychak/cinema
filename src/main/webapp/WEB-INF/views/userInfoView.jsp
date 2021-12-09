@@ -8,7 +8,6 @@
 <fmt:setBundle basename="languages/messages"/>
 
 <html lang="${cookie['lang'].value}">
-<html>
     <head>
         <meta charset="UTF-8">
         <title><fmt:message key="info.title" /></title>

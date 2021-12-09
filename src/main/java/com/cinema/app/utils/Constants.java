@@ -20,11 +20,13 @@ public final class Constants {
 
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String PASSWORD2 = "password2";
     public static final String BANK_ACCOUNT = "bankAccount";
     public static final String ROLE = "role";
 
     public static final String ID = "id";
     public static final String MAX_ID = "maxId";
+    public static final String MOVIE = "movie";
     public static final String MOVIE_TITLE = "movieTitle";
     public static final String AGE = "age";
     public static final String SESSION_TIME = "sessionTime";
@@ -83,18 +85,17 @@ public final class Constants {
     public static final String PASSWORD_TERMS = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}";
     public static final String BANK_ACCOUNT_TERMS = "\\d{8,}";
     public static final String NUMERIC_TERMS = "\\d{1,}";
+    public static final String LIST_TERMS = "(([\\d])(\\,\\s)?)*";
     public static final String DATA_TIME_TERMS = "yyyy-MM-dd HH:mm";
 
     public static final String UNKNOWN = "Unknown";
     public static final String MESSAGE = "message";
-    public static final String MESSAGE_SEATS_FREE = "All seats are free";
-    public static final String MESSAGE_FREE_PLACE = "Free places: ";
-    public static final String MESSAGE_SEATS_TAKEN = "All seats are taken";
-    public static final String ERROR_REGISTRATION = "Error. Such a user exists or the specified data does not meet the conditions of registration";
-    public static final String ERROR_INVALID_FIELDS = "Invalid login or Password";
-    public static final String ERROR_ID = "Error. The specified session ID does not exist";
-    public static final String ERROR_MOVIE_SESSION = "Error. You cannot add a movie to the schedule later than the day before it is shown or the data is entered incorrectly";
-    public static final String ERROR_EMPTY = "Error. One of the fields is empty or incorrectly filled";
+    public static final String MESSAGE2 = "message2";
+    public static final String MESSAGE_SEATS_FREE = "free";
+    public static final String MESSAGE_SEATS_TAKEN = "taken";
+    public static final String MESSAGE_REGISTRATION = "registration";
+    public static final String MESSAGE_ACCOUNT = "account";
+    public static final String MESSAGE_EMPTY = "empty";
     public static final String ERROR_PARAMETER_INVALID = "Parameter %s is invalid";
     public static final String ERROR_CONNECTION = "Cannot obtain a connection from pool";
     public static final String ERROR_PUT_BACK = "Connection not in the used array";

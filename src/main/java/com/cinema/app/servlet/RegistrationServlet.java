@@ -1,6 +1,7 @@
 package com.cinema.app.servlet;
 
-import java.io.IOException;
+import com.cinema.app.service.UserService;
+import com.cinema.app.utils.Constants;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.cinema.app.service.UserService;
-import com.cinema.app.utils.Constants;
+import java.io.IOException;
 
 @WebServlet(Constants.URL_REGISTRATION)
 public class RegistrationServlet extends HttpServlet {
@@ -35,14 +34,21 @@ public class RegistrationServlet extends HttpServlet {
 
         String login = request.getParameter(Constants.LOGIN);
         String password = request.getParameter(Constants.PASSWORD);
+        String password2 = request.getParameter(Constants.PASSWORD2);
         String bankAccount = request.getParameter(Constants.BANK_ACCOUNT);
+
+        if(!password.equals(password2)){
+            request.setAttribute(Constants.MESSAGE, Constants.PASSWORD);
+            doGet(request, response);
+            return;
+        }
 
         boolean correct = isDone(login, password, bankAccount, Constants.USER);
 
         if (correct) {
             response.sendRedirect(Constants.JSP_CONGRATULATIONS);
         } else {
-            request.setAttribute(Constants.MESSAGE, Constants.ERROR_REGISTRATION);
+            request.setAttribute(Constants.MESSAGE, Constants.MESSAGE_REGISTRATION);
             doGet(request, response);
         }
     }

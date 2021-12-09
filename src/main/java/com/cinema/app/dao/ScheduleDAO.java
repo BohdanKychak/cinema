@@ -5,14 +5,17 @@ import com.cinema.app.model.Page;
 import com.cinema.app.model.SchedulePage;
 import com.cinema.app.model.SortBy;
 import com.cinema.app.utils.Constants;
+import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 import static java.lang.String.format;
 

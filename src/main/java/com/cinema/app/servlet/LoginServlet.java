@@ -1,8 +1,9 @@
 package com.cinema.app.servlet;
 
-import java.io.IOException;
-import java.util.Objects;
-
+import com.cinema.app.model.Account;
+import com.cinema.app.service.UserService;
+import com.cinema.app.utils.AppUtils;
+import com.cinema.app.utils.Constants;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.cinema.app.model.Account;
-import com.cinema.app.service.UserService;
-import com.cinema.app.utils.AppUtils;
-import com.cinema.app.utils.Constants;
+import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(Constants.URL_LOGIN)
 public class LoginServlet extends HttpServlet {
@@ -42,10 +40,10 @@ public class LoginServlet extends HttpServlet {
 
         String login = request.getParameter(Constants.LOGIN);
         String password = request.getParameter(Constants.PASSWORD);
-        Account account = UserService.findUser(login, password);
+        Account account = UserService.findUser(login, Constants.EMPTY + password.hashCode());
 
         if (account == null) {
-            request.setAttribute(Constants.MESSAGE, Constants.ERROR_INVALID_FIELDS);
+            request.setAttribute(Constants.MESSAGE, Constants.LOGIN);
             doGet(request, response);
             return;
         }
@@ -56,7 +54,7 @@ public class LoginServlet extends HttpServlet {
         try {
             redirectId = Integer.parseInt(request.getParameter(Constants.REDIRECT_ID));
         } catch (Exception e) {
-            log.info(e.getMessage()+ " redirectId is null");
+            log.info(e.getMessage() + " redirectId is null");
         }
         String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         response.sendRedirect(Objects.requireNonNullElseGet(requestUri, () -> request.getContextPath() + Constants.URL_INFO));

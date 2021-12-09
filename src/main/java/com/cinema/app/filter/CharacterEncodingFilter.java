@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CharacterEncodingFilter implements Filter {
 
     @Override
-    public void init(FilterConfig config){
+    public void init(FilterConfig config) {
     }
 
     @Override

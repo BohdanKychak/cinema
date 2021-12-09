@@ -1,10 +1,10 @@
 package com.cinema.app.dao;
 
+import com.cinema.app.service.PlaceService;
 import com.cinema.app.utils.Constants;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
-
-import org.apache.log4j.Logger;
 
 import static java.lang.String.format;
 
@@ -24,16 +24,17 @@ public class PurchaseDAO {
     }
 
     private static boolean ticketPurchase(long id, int place, String purchaseCode, long userId) {
-        if (checkAccount(userId)) {
+        if (checkAccount(userId) && PlaceService.isFreePlace(id, place)) {
             if (!seatReservation(userId, id, place, purchaseCode)) {
                 return false;
             }
+            if (checkAccount(userId)) {
+                withdrawMoney(userId);
+                takeMoney();
+                return true;
+            }
         }
-        if (checkAccount(userId)) {
-            withdrawMoney(userId);
-            takeMoney();
-        }
-        return true;
+        return false;
     }
 
     private static boolean checkAccount(long userId) {
