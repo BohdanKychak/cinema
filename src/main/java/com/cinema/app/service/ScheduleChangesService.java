@@ -43,7 +43,8 @@ public class ScheduleChangesService {
     }
 
     static boolean isTimeCorrectly(LocalDateTime localDateTime) {
-        return LocalDateTime.now().isBefore(localDateTime) && localDateTime.getHour() >= Constants.HOUR_START && localDateTime.getHour() < Constants.HOUR_FINISH;
+        return LocalDateTime.now().isBefore(localDateTime) && LocalDateTime.now().getDayOfYear() != localDateTime.getDayOfYear()
+                && localDateTime.getHour() >= Constants.HOUR_START && localDateTime.getHour() < Constants.HOUR_FINISH;
     }
 
     public static String getErrorMessage(int errorCode) {
